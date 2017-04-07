@@ -56,7 +56,7 @@
 
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
     
-    NSLog(@"stream event %i", streamEvent);
+    NSLog(@"stream event %i", (int)streamEvent);
     
     switch (streamEvent) {
             
@@ -76,16 +76,18 @@
                 int len;
                 
                 while ([inputStream hasBytesAvailable]) {
-                    len = [inputStream read:buffer maxLength:sizeof(buffer)];
+                    len = (int)[inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
+                        
+//                        NSLog(@"buffer:%d",buffer);
                         
                         NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
                         
                         if (nil != output) {
                             
                             NSLog(@"server said: %@", output);
-                            if ([self.delegate respondsToSelector:@selector(messageReceived:)]) {
-                                [self.delegate messageReceived:output];
+                            if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
+                                [self.delegate messageReceived:output messageType:self.type];
                             }
                         }
                     }
@@ -102,7 +104,6 @@
             break;
             
         case NSStreamEventEndEncountered:
-            
             [theStream close];
             [theStream removeFromRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
             [theStream release];
@@ -114,8 +115,10 @@
     }
 }
 
-- (void)sendMessageToServer:(NSString *)mesage {
+- (void)sendMessageToServer:(NSString *)mesage
+                messageType:(MessageType) type{
     NSLog(@"message send:%@",mesage);
+    self.type = type;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         NSData *data = [[NSData alloc] initWithData:[mesage dataUsingEncoding:NSASCIIStringEncoding]];
         [outputStream write:[data bytes] maxLength:[data length]];
@@ -123,9 +126,12 @@
     
 }
 
+- (void) close {
+    [inputStream close];
+    [outputStream close];
+}
 
 - (void)dealloc {
-    
     [inputStream release];
     [outputStream release];
     self.delegate = nil;

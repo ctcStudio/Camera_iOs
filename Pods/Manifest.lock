@@ -31,6 +31,7 @@ PODS:
   - FBSDKShareKit (4.13.1):
     - FBSDKCoreKit
   - KeychainItemWrapper (1.2)
+  - SVProgressHUD (2.1.2)
   - SVPullToRefresh (0.4.1)
   - SwiftSocket (2.0.1)
   - TPKeyboardAvoiding (1.3)
@@ -46,6 +47,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - FBSDKShareKit
   - KeychainItemWrapper
+  - SVProgressHUD
   - SVPullToRefresh
   - SwiftSocket
   - TPKeyboardAvoiding
@@ -62,12 +64,13 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
   KeychainItemWrapper: 67a240172ed669842bc6bc13ed554dcd50469fa2
+  SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftSocket: 2d814afdc97c89217982f86fd036c1874134a63f
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UIAlertController+Blocks: b48c673ff60726da468b32ab21bbc7683512d45b
   UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
 
-PODFILE CHECKSUM: 92b7fa14eccb5c42f746ef9c5c572fd7d12478e8
+PODFILE CHECKSUM: c21a1aa5b45606d5481f782a98cd3b0af1f817e9
 
 COCOAPODS: 1.1.1

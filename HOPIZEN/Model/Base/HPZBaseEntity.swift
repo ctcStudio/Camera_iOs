@@ -15,8 +15,8 @@ class HPZBaseEntity: NSObject {
         
     }
     
-    func paserStringRespon(istring:String) -> Void {
-        
+    func paserStringRespon(message:String) -> Bool {
+        return false
     }
     
 }

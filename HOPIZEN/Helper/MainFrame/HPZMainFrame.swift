@@ -32,9 +32,8 @@ class HPZMainFrame: NSObject {
     }
     
     static func makeCenterNavi () -> UINavigationController {// 84 86 172
-        let naviRoot = HPZHomeViewController(nibName: "HPZHomeViewController", bundle: nil)
+        let naviRoot = LoginViewController(nibName: "LoginViewController", bundle: nil)
         let navi = HPZCutomNavigationController(rootViewController: naviRoot)
-        navi.addLeftBtnWithBackgroundImage(bgImg: UIImage(named: "menu"), title: "", titleColor: UIColor.black, targer: self, action: #selector(HPZMainFrame.menuBtnTouched(sender:)))
         navi.navigationBar.isTranslucent = false
         return navi
     }
@@ -55,11 +54,27 @@ class HPZMainFrame: NSObject {
         mainFrame!.toggleSidebar(nil)
     }
     
-    static func showHomeVC() -> Void {
-        let vc = HPZHomeViewController(nibName: "HPZHomeViewController", bundle: nil)
+    static func showLoginVC() -> Void {
+        let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
         (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
         
     }
+    
+    static func showHomeVC(cameraGroup: [CameraGroup]) -> Void {
+        let vc = HomeTableViewController(nibName: "HomeTableViewController", bundle: nil)
+        vc.cameraGroupList = cameraGroup
+        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        
+    }
+    
+    static func showPlayBackVC(cameraGroup: [CameraGroup]) -> Void {
+        let vc = PlayBackViewController(nibName: "PlayBackViewController", bundle: nil)
+        vc.cameraGroupList = cameraGroup
+        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        
+    }
+
+    
     static func getNavi() -> HPZCutomNavigationController{
         let navi = mainFrame?.centerVC as! HPZCutomNavigationController
         return navi
@@ -67,5 +82,10 @@ class HPZMainFrame: NSObject {
     
     static func addMenuBtn() -> Void {
         self.getNavi().addLeftBtnWithBackgroundImage(bgImg: UIImage(named: "menu"), title: "", titleColor: UIColor.black, targer: self, action: #selector(HPZMainFrame.menuBtnTouched(sender:)))
+    }
+
+    
+    static func addMenuLeft(title:String, titleColor: UIColor?, target:AnyObject?, action: Selector) {
+        self.getNavi().addLeftBtnWithTitle(title: title, titleColor: titleColor, target: target, action: action)
     }
 }

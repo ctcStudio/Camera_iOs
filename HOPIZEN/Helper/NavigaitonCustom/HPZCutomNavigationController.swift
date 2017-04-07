@@ -78,6 +78,20 @@ class HPZCutomNavigationController: UINavigationController {
         self.topViewController?.navigationItem.rightBarButtonItem = barBtn
     }
     
+    func addRightBtnWithTitle(title:String?, titleColor:UIColor?, target:AnyObject?, action:Selector) -> Void {
+        let barBtn = UIBarButtonItem(title: title, style: .plain, target: target, action:action)
+        barBtn.setTitleTextAttributes([NSForegroundColorAttributeName : titleColor!], for: UIControlState.normal)
+    
+        self.topViewController?.navigationItem.rightBarButtonItem = barBtn
+    }
+    
+    func addLeftBtnWithTitle(title:String?, titleColor:UIColor?, target:AnyObject?, action:Selector) -> Void {
+        let barBtn = UIBarButtonItem(title: title, style: .plain, target: target, action:action)
+        barBtn.setTitleTextAttributes([NSForegroundColorAttributeName : titleColor!], for: UIControlState.normal)
+        
+        self.topViewController?.navigationItem.leftBarButtonItem = barBtn
+    }
+    
     //    func setColorForitem(enable : Bool, isLeft : Bool) {
     //        let color = enable ? UIColor.blackColor : UIColor.grayColor
     //        var barBtn: UIBarButtonItem

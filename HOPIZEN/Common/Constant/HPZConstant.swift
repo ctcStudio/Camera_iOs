@@ -32,3 +32,18 @@ struct PDevice {
     static let os_version       = UIDevice.current.systemVersion
     
 }
+
+
+struct defaultsKeys {
+    static let keyUserName = "userNameStringKey"
+    static let keyPassword = "passwordStringKey"
+    static let keyServerAddress = "serverAddressStringKey"
+    static let keyHasSavePassword = "savePasswordStringKey"
+}
+
+enum PickerType:Int {
+    case FromType = 1
+    case ToType = 2
+    case NameType = 3
+    case SpeedType = 4
+}
