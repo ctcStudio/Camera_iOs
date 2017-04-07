@@ -75,6 +75,9 @@
                                 <constraint firstAttribute="width" secondItem="H3P-OI-PNC" secondAttribute="height" multiplier="23:15" id="ORh-Cr-jR7"/>
                             </constraints>
                             <state key="normal" title="Gps"/>
+                            <connections>
+                                <action selector="clickGps:" destination="iN0-l3-epB" eventType="touchUpInside" id="QWy-jj-J1p"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -109,6 +112,13 @@
                 <constraint firstItem="taM-j6-jBs" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="rMD-YZ-RlZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="ImageRealTime" destination="taM-j6-jBs" id="RjR-OB-23r"/>
+                <outlet property="addressView" destination="Gji-UV-Ga7" id="Lhx-70-hx2"/>
+                <outlet property="cameraInfo" destination="0Qv-pV-dQA" id="2Ig-Va-dNH"/>
+                <outlet property="cameraName" destination="55N-HS-47i" id="ghm-jy-d00"/>
+                <outlet property="heightView" destination="kkF-q2-sFv" id="tTE-qI-Lha"/>
+            </connections>
             <point key="canvasLocation" x="24.5" y="129"/>
         </view>
     </objects>
