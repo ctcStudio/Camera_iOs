@@ -23,19 +23,20 @@ class DetailViewController: UIViewController {
     var pass:String?
     var host:String?
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenSize: CGRect = UIScreen.main.bounds
-//        let bundle = Bundle.init(for: PlayBackDetailView.self)
-//        let nib = bundle.loadNibNamed("PlayBackDetailView", owner: self, options: nil)
-//        self.playBackView = nib?.first as? PlayBackDetailView
-//        self.playBackView?.frame = screenSize
         
         self.playBackView = PlayBackDetailView.init(frame: screenSize)
         self.playBackView?.playBack = self.playBack!
         self.playBackView?.cameraId = self.cameraId
         self.playBackView?.speed = self.speed
-        self.view.addSubview(self.playBackView!)
+        
+        scrollView.contentSize = (self.playBackView?.bounds.size)!
+        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.scrollView.addSubview(self.playBackView!)
 
         self.playBackView?.isHidden = false
         // Do any additional setup after loading the view.
@@ -167,16 +168,22 @@ extension DetailViewController:HPZSoketXXXXXDelegate {
             
             let pictureData = result?.subdata(in: beginPic..<endPic + 1)
             
+            let image = UIImage.init(data: pictureData!)
+            self.playBackView?.ImagePlayBack.image = image!
+            
             if(endPic + 9 < bytes.count) {
                 let cameraIdData = result?.subdata(in: (endPic + 1)..<(endPic + 9))
                 let int64:Int64! = cameraIdData?.to(type: Int64.self)
                 print(int64)
+                let nameCamera:String = (self.playBack?.toString())!
+                self.playBackView?.cameraName.text = nameCamera
             }
             let startFileName = endPic + 9
             let endFileName = startFileName + 13
+            var fileName:String!
             if(endFileName < bytes.count) {
                 let fileNameData = result?.subdata(in: startFileName..<endFileName)
-                let fileName = String.init(data: fileNameData!, encoding: String.Encoding.ascii)!
+                fileName = String.init(data: fileNameData!, encoding: String.Encoding.ascii)!
                 print(fileName)
             }
             
@@ -184,6 +191,11 @@ extension DetailViewController:HPZSoketXXXXXDelegate {
                 let timePlay = result?.subdata(in: endFileName..<(endFileName + 2))
                 let count:Int16! = timePlay?.to(type: Int16.self)
                 print(count)
+                let hour = count/60
+                let minus = count%60
+                
+                let info:String! = fileName + ":" + String.init(hour) + ":" + String.init(minus)
+                self.playBackView?.cameraInfo.text = info
             }
             
         }
