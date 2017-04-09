@@ -11,8 +11,10 @@
 
 @interface HPZSoketXXXXX () <NSStreamDelegate> {
     
-    @public NSInputStream	*inputStream;
-    @public NSOutputStream	*outputStream;
+    NSInputStream	*inputStream;
+    NSOutputStream	*outputStream;
+    
+    NSMutableData *data;
     
     NSString *host;
     int port;
@@ -31,6 +33,8 @@
         host = ihost;
         port = iport;
         [self initNetworkCommunication];
+        
+        data = [[NSMutableData alloc] init];
     }
     return self;
 }
@@ -53,7 +57,6 @@
 }
 
 
-
 - (void)stream:(NSStream *)theStream handleEvent:(NSStreamEvent)streamEvent {
     
     NSLog(@"stream event %i", (int)streamEvent);
@@ -72,32 +75,38 @@
             
             if (theStream == inputStream) {
                 
-                uint8_t buffer[4096];
+                uint8_t buffer[1024];
                 int len;
                 
                 while ([inputStream hasBytesAvailable]) {
                     len = (int)[inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
-                        NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
-                        NSData* data = [NSData dataWithBytes:buffer length:len];
+                        [data appendBytes:buffer length:len];
                         
-                        if (nil != output || nil != data) {
-                            NSLog(@"server said: %@", output);
-                            if(self.type == REALTIME
-                               || self.type == VODDATA) {
-                                if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
-                                    [self.delegate messageReceivedData:data messageType:self.type];
-                                } else if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
-                                    [self.delegate messageReceived:output messageType:self.type];
-                                }
-                            } else {
-                                if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
-                                    [self.delegate messageReceived:output messageType:self.type];
-                                } else if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
-                                    [self.delegate messageReceivedData:data messageType:self.type];
-                                }
+                    }
+                }
+                
+                NSString *output = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
+                if (nil != output || nil != data) {
+                    if(self.type == REALTIME
+                       || self.type == VODDATA) {
+                        NSInteger position = [self checkDataPicture];
+                        if(position > 0) {
+                            if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
+                                [self.delegate messageReceivedData:data messageType:self.type];
+                            } else if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
+                                [self.delegate messageReceived:output messageType:self.type];
                             }
+                            [data replaceBytesInRange:NSMakeRange(0, position) withBytes:NULL length:0];
                         }
+                    } else {
+                        NSLog(@"server said: %@", output);
+                        if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
+                            [self.delegate messageReceived:output messageType:self.type];
+                        } else if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
+                            [self.delegate messageReceivedData:data messageType:self.type];
+                        }
+                        [data setLength:0];
                     }
                 }
             }
@@ -121,6 +130,33 @@
         default:
             NSLog(@"Unknown event");
     }
+}
+
+- (NSInteger) checkDataPicture {
+    NSInteger result = -1;
+    NSUInteger len = [data length];
+    Byte *bytes = (Byte*)malloc(len);
+    memcpy(bytes, [data bytes], len);
+    int beginPic = -1;
+    int endPic = -1;
+    for (int i = 0; i<len-1; i++) {
+        if(bytes[i] == 0xFF
+           && bytes[i+1] == 0xD8) {
+            beginPic = i;
+        }
+        
+        if(bytes[i] == 0xFF
+           && bytes[i+1] == 0xD9) {
+            endPic = i + 1;
+            break;
+        }
+    }
+    if(beginPic * endPic > 0
+       && endPic + 24 <= len) {
+        result = endPic + 24;
+    }
+    
+    return result;
 }
 
 - (void)sendMessageToServer:(NSString *)mesage

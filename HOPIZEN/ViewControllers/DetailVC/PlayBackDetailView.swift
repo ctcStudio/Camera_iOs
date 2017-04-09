@@ -28,6 +28,14 @@ class PlayBackDetailView: UIView {
     var pass:String?
     var host:String?
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     func showOrHiddenView() {
         if 1==1 {
             self.heightView.constant = 0

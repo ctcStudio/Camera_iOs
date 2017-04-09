@@ -18,18 +18,7 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VmW-xZ-Mnp">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                </scrollView>
-            </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <constraints>
-                <constraint firstItem="VmW-xZ-Mnp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1iA-6q-2s0"/>
-                <constraint firstAttribute="trailing" secondItem="VmW-xZ-Mnp" secondAttribute="trailing" id="6nj-95-Zcx"/>
-                <constraint firstAttribute="bottom" secondItem="VmW-xZ-Mnp" secondAttribute="bottom" id="E6W-aO-SB8"/>
-                <constraint firstItem="VmW-xZ-Mnp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="gnC-hD-aiq"/>
-            </constraints>
             <point key="canvasLocation" x="25.5" y="52.5"/>
         </view>
     </objects>
