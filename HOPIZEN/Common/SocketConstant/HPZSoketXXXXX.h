@@ -23,7 +23,12 @@ typedef NS_ENUM(NSInteger, MessageType) {
 @protocol HPZSoketXXXXXDelegate <NSObject>
 
 - (void)socketDidConnect;
+
+@optional
 - (void)messageReceived:(NSString *)message
+            messageType:(MessageType) type;
+
+- (void)messageReceivedData:(NSData *)result
             messageType:(MessageType) type;
 
 @end
@@ -43,4 +48,6 @@ typedef NS_ENUM(NSInteger, MessageType) {
 - (void) sendMessageToServer:(NSString *)mesage
                  messageType:(MessageType) type;
 
+- (void) sendDataToServer:(NSData *)data
+                 messageType:(MessageType) type;
 @end

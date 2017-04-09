@@ -11,8 +11,8 @@
 
 @interface HPZSoketXXXXX () <NSStreamDelegate> {
     
-    NSInputStream	*inputStream;
-    NSOutputStream	*outputStream;
+    @public NSInputStream	*inputStream;
+    @public NSOutputStream	*outputStream;
     
     NSString *host;
     int port;
@@ -72,22 +72,30 @@
             
             if (theStream == inputStream) {
                 
-                uint8_t buffer[1024];
+                uint8_t buffer[4096];
                 int len;
                 
                 while ([inputStream hasBytesAvailable]) {
                     len = (int)[inputStream read:buffer maxLength:sizeof(buffer)];
                     if (len > 0) {
-                        
-//                        NSLog(@"buffer:%d",buffer);
-                        
                         NSString *output = [[NSString alloc] initWithBytes:buffer length:len encoding:NSASCIIStringEncoding];
+                        NSData* data = [NSData dataWithBytes:buffer length:len];
                         
-                        if (nil != output) {
-                            
+                        if (nil != output || nil != data) {
                             NSLog(@"server said: %@", output);
-                            if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
-                                [self.delegate messageReceived:output messageType:self.type];
+                            if(self.type == REALTIME
+                               || self.type == VODDATA) {
+                                if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
+                                    [self.delegate messageReceivedData:data messageType:self.type];
+                                } else if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
+                                    [self.delegate messageReceived:output messageType:self.type];
+                                }
+                            } else {
+                                if ([self.delegate respondsToSelector:@selector(messageReceived:messageType:)]) {
+                                    [self.delegate messageReceived:output messageType:self.type];
+                                } else if ([self.delegate respondsToSelector:@selector(messageReceivedData:messageType:)]) {
+                                    [self.delegate messageReceivedData:data messageType:self.type];
+                                }
                             }
                         }
                     }
@@ -124,6 +132,16 @@
         [outputStream write:[data bytes] maxLength:[data length]];
     });
     
+}
+
+
+- (void) sendDataToServer:(NSData *)data
+              messageType:(MessageType) type {
+    NSLog(@"message send:%@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+    self.type = type;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [outputStream write:[data bytes] maxLength:[data length]];
+    });
 }
 
 - (void) close {

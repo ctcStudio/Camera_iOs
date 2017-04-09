@@ -189,6 +189,11 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         return cell!
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let playBack = self.playBackList[indexPath.row]
+        let camId = Int64(playBack.cameraID!)
+        HPZMainFrame.showPlayBackDetailVC( cameraGroup: self.cameraGroupList, playBackList: self.playBackList, playBack: playBack, camId: camId!, speed: self.selectedSpeed!)
+    }
     // MARK: - Picker view data source
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

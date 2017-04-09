@@ -42,9 +42,9 @@ class LoginViewController: UIViewController{
         
         let defaults = UserDefaults.standard
         self.name = defaults.string(forKey: defaultsKeys.keyUserName)
-        self.userName.text = self.name
+        
         self.pass = defaults.string(forKey: defaultsKeys.keyPassword)
-        self.password.text = self.pass
+        
         self.host = defaults.string(forKey: defaultsKeys.keyServerAddress)
         if (self.host != nil && !(self.host?.isEmpty)!) {
             self.serverAddress.text = self.host
@@ -52,9 +52,11 @@ class LoginViewController: UIViewController{
         
         self.hasSavePass = defaults.bool(forKey: defaultsKeys.keyHasSavePassword)
         if(self.hasSavePass) {
-            self.savePassword.image = UIImage(named: "checkbox_normal_white");
-        } else {
             self.savePassword.image = UIImage(named: "checkbox_checked_white");
+            self.password.text = self.pass
+            self.userName.text = self.name
+        } else {
+            self.savePassword.image = UIImage(named: "checkbox_normal_white");
         }
     }
     
@@ -127,11 +129,10 @@ extension LoginViewController : HPZSoketXXXXXDelegate {
                 if self.cameraList.count > 0 {
                     self.sendMessageCheckOnline()
                     let defaults = UserDefaults.standard
-                    if(hasSavePass) {
+                
                         defaults.set(self.name, forKey: defaultsKeys.keyUserName)
                         defaults.set(self.pass, forKey: defaultsKeys.keyPassword)
                         defaults.set(self.host, forKey: defaultsKeys.keyServerAddress)
-                    }
                     defaults.set(self.hasSavePass, forKey: defaultsKeys.keyHasSavePassword)
                 }
             }

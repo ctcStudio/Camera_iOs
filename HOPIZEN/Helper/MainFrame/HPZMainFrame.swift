@@ -60,6 +60,17 @@ class HPZMainFrame: NSObject {
         
     }
     
+    static func showPlayBackDetailVC(cameraGroup: [CameraGroup], playBackList: [PlayBackModel], playBack: PlayBackModel, camId: Int64, speed:Int8) -> Void {
+        let vc = DetailViewController(nibName: "DetailViewController", bundle: nil)
+        vc.playBack = playBack
+        vc.cameraId = camId
+        vc.speed = speed
+        vc.cameraGroupList = cameraGroup
+        vc.playBackList = playBackList
+        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        
+    }
+    
     static func showHomeVC(cameraGroup: [CameraGroup]) -> Void {
         let vc = HomeTableViewController(nibName: "HomeTableViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
@@ -73,6 +84,15 @@ class HPZMainFrame: NSObject {
         (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
         
     }
+    
+    static func showPlayBackVC(cameraGroup: [CameraGroup], playBackList: [PlayBackModel]) -> Void {
+        let vc = PlayBackViewController(nibName: "PlayBackViewController", bundle: nil)
+        vc.cameraGroupList = cameraGroup
+        vc.playBackList = playBackList
+        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        
+    }
+
 
     
     static func getNavi() -> HPZCutomNavigationController{
