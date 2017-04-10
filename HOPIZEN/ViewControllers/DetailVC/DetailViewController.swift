@@ -28,8 +28,10 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let screenSize: CGRect = UIScreen.main.bounds
+        let height = screenSize.width + 30 + 70 + screenSize.width
+        let viewSize:CGRect = CGRect.init(x: 0, y: 0, width: screenSize.width, height: height)
         
-        self.playBackView = PlayBackDetailView.init(frame: screenSize)
+        self.playBackView = PlayBackDetailView.init(frame: viewSize)
         self.playBackView?.playBack = self.playBack!
         self.playBackView?.cameraId = self.cameraId
         self.playBackView?.speed = self.speed
@@ -191,6 +193,7 @@ extension DetailViewController:HPZSoketXXXXXDelegate {
                 let timePlay = result?.subdata(in: endFileName..<(endFileName + 2))
                 let count:Int16! = timePlay?.to(type: Int16.self)
                 print(count)
+                self.playBackView?.cameraSlider.value = Float.init(count)
                 let hour = count/60
                 let minus = count%60
                 

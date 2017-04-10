@@ -16,6 +16,7 @@ class PlayBackDetailView: UIView {
     @IBOutlet weak var cameraInfo: UILabel!
     @IBOutlet weak var addressView: UILabel!
     @IBOutlet weak var cameraSlider:UISlider!
+    @IBOutlet weak var mapView:UIView!
     
     @IBOutlet weak var heightView: NSLayoutConstraint!
     
@@ -56,15 +57,22 @@ class PlayBackDetailView: UIView {
         return view
     }
     
-    func showOrHiddenView(isHidden:Bool) {
+    func sethiddenView(isHidden:Bool) {
         if isHidden {
             self.heightView.constant = 0
         } else {
-            self.heightView.constant = 375
+            self.heightView.constant = self.frame.size.width
         }
         self.updateConstraints()
     }
     
     @IBAction func clickGps(_ sender: UIButton) {
+        if(mapView.isHidden) {
+            self.mapView.isHidden = false
+            self.sethiddenView(isHidden: false)
+        } else {
+            self.mapView.isHidden = true
+            self.sethiddenView(isHidden: true)
+        }
     }
 }
