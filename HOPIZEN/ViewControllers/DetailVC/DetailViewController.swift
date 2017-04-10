@@ -44,7 +44,8 @@ class DetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
         
-        self.initSocket()
+        //self.initSocket()
+        self.playBackView?.initSocket()
     }
     
     func playBack(sender:UIButton!){
@@ -59,6 +60,18 @@ class DetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
         self.sk?.close()
         self.sk = nil
+    }
+    
+//    deinit {
+//        self.sk?.close()
+//        self.sk = nil
+//    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.sk?.close()
+        self.sk = nil
+        self.playBackView?.closeSocker()
     }
     
     
