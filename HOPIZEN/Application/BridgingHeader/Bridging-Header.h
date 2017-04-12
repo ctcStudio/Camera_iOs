@@ -15,7 +15,9 @@
 #import <KeychainItemWrapper/KeychainItemWrapper.h>
 #import "Communicator.h"
 #import "HPZSoketXXXXX.h"
-#import "SVProgressHUD/SVProgressHUD.h"
+#import <GoogleMaps/GoogleMaps.h>
+@import GoogleMaps;
+#import <SVProgressHUD/SVProgressHUD.h>
 @import SVProgressHUD;
 
 #endif /* Bridging_Header_h */

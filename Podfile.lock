@@ -30,6 +30,11 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.13.1):
     - FBSDKCoreKit
+  - GoogleMaps (2.1.1):
+    - GoogleMaps/Maps (= 2.1.1)
+  - GoogleMaps/Base (2.1.1)
+  - GoogleMaps/Maps (2.1.1):
+    - GoogleMaps/Base
   - KeychainItemWrapper (1.2)
   - SVProgressHUD (2.1.2)
   - SVPullToRefresh (0.4.1)
@@ -46,6 +51,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
+  - GoogleMaps
   - KeychainItemWrapper
   - SVProgressHUD
   - SVPullToRefresh
@@ -63,6 +69,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 2807fe0da2ddb49a1469da6d6ff597f99912980f
   FBSDKLoginKit: 6d350cb6a22d6956e9d078885de6ee8a0ebc51b4
   FBSDKShareKit: c9438df7573b33780ac8c3451201c5ebb260ffca
+  GoogleMaps: a5b5bbe47734e2443bde781a6aa64e69fdb6d785
   KeychainItemWrapper: 67a240172ed669842bc6bc13ed554dcd50469fa2
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
   SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
@@ -71,6 +78,6 @@ SPEC CHECKSUMS:
   UIAlertController+Blocks: b48c673ff60726da468b32ab21bbc7683512d45b
   UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
 
-PODFILE CHECKSUM: c21a1aa5b45606d5481f782a98cd3b0af1f817e9
+PODFILE CHECKSUM: 88fe091c3889b1700eb3d32070d1201869bd347b
 
 COCOAPODS: 1.1.1

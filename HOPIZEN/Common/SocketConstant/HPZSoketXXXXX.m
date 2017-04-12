@@ -181,8 +181,12 @@
 }
 
 - (void) close {
-    [inputStream close];
-    [outputStream close];
+    if( inputStream !=nil) {
+        [inputStream close];
+    }
+    if (outputStream !=nil) {
+        [outputStream close];
+    }
 }
 
 - (void)dealloc {

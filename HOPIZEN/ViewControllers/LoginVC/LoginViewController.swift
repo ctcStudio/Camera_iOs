@@ -60,6 +60,12 @@ class LoginViewController: UIViewController{
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.sk?.close()
+        self.sk = nil
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

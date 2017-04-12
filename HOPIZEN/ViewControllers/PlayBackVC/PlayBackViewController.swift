@@ -89,6 +89,12 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.selectSpeed.setTitle(selectedSpeedString, for: UIControlState.normal)
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.skPlayer?.close()
+        self.skPlayer = nil
+    }
+    
     func intCameraList() -> Void {
         self.cameraList.removeAll()
         for cameraGroup in self.cameraGroupList {

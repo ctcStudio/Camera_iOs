@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 
         // Facebook SDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        GMSServices.provideAPIKey("AIzaSyCbfd0oi-9sNp0Ut7bexP_1EOVKo_EJaBc")
         self.showMainScreen()
         return true
     }

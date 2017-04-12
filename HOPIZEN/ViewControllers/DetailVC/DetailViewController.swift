@@ -27,6 +27,9 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
+        
         let screenSize: CGRect = UIScreen.main.bounds
         let height = screenSize.width + 30 + 70 + screenSize.width
         let viewSize:CGRect = CGRect.init(x: 0, y: 0, width: screenSize.width, height: height)
@@ -35,16 +38,12 @@ class DetailViewController: UIViewController {
         self.playBackView?.playBack = self.playBack!
         self.playBackView?.cameraId = self.cameraId
         self.playBackView?.speed = self.speed
-        
-        scrollView.contentSize = (self.playBackView?.bounds.size)!
-        scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.scrollView.addSubview(self.playBackView!)
-
         self.playBackView?.isHidden = false
-        // Do any additional setup after loading the view.
-        HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
         
-        //self.initSocket()
+        self.scrollView.contentSize = (self.playBackView?.bounds.size)!
+        self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        self.scrollView.addSubview(self.playBackView!)
+    
         self.playBackView?.initSocket()
     }
     
@@ -62,16 +61,10 @@ class DetailViewController: UIViewController {
         self.sk = nil
     }
     
-//    deinit {
-//        self.sk?.close()
-//        self.sk = nil
-//    }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        self.sk?.close()
-        self.sk = nil
-        self.playBackView?.closeSocker()
+        self.playBackView?.closeSocket()
     }
     
     
@@ -84,7 +77,7 @@ class DetailViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
-    
+    /*
     func initSocket() -> Void {
         let userDefault = UserDefaults.standard
         self.host = userDefault.string(forKey: defaultsKeys.keyServerAddress)
@@ -103,8 +96,10 @@ class DetailViewController: UIViewController {
         self.sk?.delegate = self
         
     }
+    */
 }
 
+/*
 extension DetailViewController:HPZSoketXXXXXDelegate {
     func socketDidConnect() {
         self.sendLoginPlayBack()
@@ -218,3 +213,4 @@ extension DetailViewController:HPZSoketXXXXXDelegate {
         
     }
 }
+*/
