@@ -15,21 +15,16 @@ class RealTimeDetailView: UIView {
     @IBOutlet weak var cameraName: UILabel!
     @IBOutlet weak var cameraInfo: UILabel!
     @IBOutlet weak var addressView: UILabel!
-    @IBOutlet weak var cameraSlider:UISlider!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var heightView: NSLayoutConstraint!
     
-    var playBack:PlayBackModel?
-    var timePlay:Int16 = 0
-    var speed: Int8 = 1
-    var cameraId:Int64 = 0
+    var cameraModel:CameraModel?
     
     var sk:HPZSoketXXXXX?
     var name:String?
     var pass:String?
     var host:String?
     var hasGetAddress:Bool! = false
-    var hasChangeTimePlay:Bool! = false
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -49,14 +44,10 @@ class RealTimeDetailView: UIView {
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         addSubview(view)
-        
-        self.cameraSlider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
-        self.cameraSlider.isContinuous = false
-        self.cameraSlider.addTarget(self, action: #selector(sliderValueEndChange(_:)), for: .touchUpInside)
     }
     
     func loadViewFromNib() -> UIView {
-        let nibName:String = "PlayBackDetailView"
+        let nibName:String = "RealTimeDetailView"
         let bundle = Bundle.init(for: type(of: self))
         let nib = UINib(nibName: nibName, bundle: bundle)
         
@@ -111,8 +102,8 @@ class RealTimeDetailView: UIView {
         self.mapView.camera = camera
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-        marker.title = self.playBack?.cameraName
-        marker.snippet = self.playBack?.cameraID
+        marker.title = self.cameraModel?.cameraName
+        marker.snippet = self.cameraModel?.cameraID
         marker.map = mapView
     }
     
@@ -135,30 +126,6 @@ class RealTimeDetailView: UIView {
         }
     }
     
-    func sliderValueDidChange(_ sender:UISlider!) {
-        // Use this code below only if you want UISlider to snap to values step by step
-        let roundedStepValue = round(sender.value / 1.0) * 1.0
-        sender.value = roundedStepValue
-        
-        print("Slider step value \(Int(roundedStepValue))")
-        self.timePlay = Int16(roundedStepValue)
-        self.hasChangeTimePlay = true
-       
-    }
-    
-    func sliderValueEndChange(_ sender:UISlider!) {
-        
-        SVProgressHUD.show()
-        self.sendStopVodData()
-        self.sendGetVodData()
-        self.cameraSlider.value = Float(self.timePlay)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            // your code here
-            self.hasChangeTimePlay = false
-        }
-    }
-    
     func closeSocket() {
         self.sk?.close()
         self.sk = nil
@@ -178,7 +145,7 @@ class RealTimeDetailView: UIView {
         SVProgressHUD.show()
         self.sk?.close()
         self.sk = nil
-        self.sk = HPZSoketXXXXX(host:host , port: 5051);
+        self.sk = HPZSoketXXXXX(host:host , port: 5050);
         self.sk?.delegate = self
         
     }
@@ -186,37 +153,30 @@ class RealTimeDetailView: UIView {
 
 extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     func socketDidConnect() {
-        self.sendLoginPlayBack()
+        self.sendLoginReadTime()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // your code here
+            self.sendRealTime()
+        }
     }
     
-    func sendLoginPlayBack() {
+    func sendLoginReadTime() {
         SVProgressHUD.show()
-        let mMessage:NSString = "@haicuong@:"+name!+":"+pass! as NSString
-        self.sk?.sendMessage(toServer: mMessage as String!, messageType: MessageType.LOGIN_GETDATA)
+        let mMessage:NSString = "@haicuongplayer@:"+name!+":"+pass! as NSString
+        self.sk?.sendMessage(toServer: mMessage as String!, messageType: MessageType.LOGIN_REALTIME)
     }
     
-    func sendGetVodData() {
-        var data:Data = Data()
-        let msg = "@message@yeucauVOD@message@"
-        data.append(msg.data(using: String.Encoding.ascii)!)
-        let dataCameraId:Data = Data(from:self.cameraId)
-        data.append(dataCameraId)
-        data.append((self.playBack?.fileName?.data(using: String.Encoding.ascii)!)!)
-        data.append(Data.init(from: self.timePlay))
-        data.append(Data.init(from: self.speed))
-        self.sk?.sendData(toServer: data, messageType: MessageType.VODDATA)
-    }
-    
-    func sendStopVodData() {
-        self.timePlay = 3601
-        sendGetVodData()
+    func sendRealTime() {
+        let msg = "@message@yeucauVOD@message@////" + (self.cameraModel?.cameraID)! + "////"
+        self.sk?.sendMessage(toServer: msg, messageType: MessageType.REALTIME)
     }
     
     func messageReceived(_ message: String!, messageType type: MessageType) {
         switch type {
-        case MessageType.LOGIN_GETDATA:
+        case MessageType.LOGIN_REALTIME:
             if (message.contains(find: "@message@yeucaulai@message@")){
-                sendGetVodData()
+                self.sendRealTime()
             }
             break
         default:
@@ -226,15 +186,15 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     
     func messageReceivedData(_ result: Data!, messageType type: MessageType) {
         switch type {
-        case MessageType.VODDATA:
+        case MessageType.REALTIME:
             SVProgressHUD.dismiss()
-            self.parseVodData(result: result)
+            self.parseRealTime(result: result)
         default:
             break
         }
     }
     
-    func parseVodData(result:Data?) {
+    func parseRealTime(result:Data?) {
         var bytes:[UInt8] = (result?.toArray(type: UInt8.self))!
         var beginPic:Int = -1
         var endPic:Int = -1
@@ -270,7 +230,10 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
                 if isParse! {
                     self.loadCameraPosition(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
                     speed  = String(format: "%.2f", gpsInfo.getSpeedKM()) +  " km/h"
-                    
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let info = dateFormatter.string(from:Date()) + " " + speed
+                    self.cameraInfo.text = info
                     if(self.hasGetAddress == false) {
                         self.getAddress(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
                         self.hasGetAddress = true
@@ -287,32 +250,9 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
                 let cameraIdData = result?.subdata(in: (endPic + 1)..<(endPic + 9))
                 let int64:Int64! = cameraIdData?.to(type: Int64.self)
                 print(int64)
-                let nameCamera:String = (self.playBack?.toString())!
+                let nameCamera:String = (self.cameraModel?.toString())!
                 self.cameraName.text = nameCamera
             }
-            let startFileName = endPic + 9
-            let endFileName = startFileName + 13
-            var fileName:String!
-            if(endFileName < bytes.count) {
-                let fileNameData = result?.subdata(in: startFileName..<endFileName)
-                fileName = String.init(data: fileNameData!, encoding: String.Encoding.ascii)!
-                print(fileName)
-            }
-            
-            if(endFileName + 2 <= bytes.count) {
-                let timePlay = result?.subdata(in: endFileName..<(endFileName + 2))
-                let count:Int16! = timePlay?.to(type: Int16.self)
-                print(count)
-                if(self.hasChangeTimePlay == false) {
-                    self.cameraSlider.value = Float.init(count)
-                }
-                let hour = count/60
-                let minus = count%60
-                let infoCam = fileName + String(format: ":%02d:%02d",hour,minus)
-                let info:String! = infoCam + " " + speed
-                self.cameraInfo.text = info
-            }
-            
         }
         
     }

@@ -78,6 +78,14 @@ class HPZMainFrame: NSObject {
         
     }
     
+    static func showRealTimeDetailVC(cameraGroup: [CameraGroup], cameraModel: CameraModel) -> Void {
+        let vc = DetailRealTimeViewController(nibName: "DetailRealTimeViewController", bundle: nil)
+        vc.cameraGroupList = cameraGroup
+        vc.cameraModel = cameraModel
+        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        
+    }
+    
     static func showPlayBackVC(cameraGroup: [CameraGroup]) -> Void {
         let vc = PlayBackViewController(nibName: "PlayBackViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
