@@ -46,6 +46,7 @@ class DetailRealTimeViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         self.realTimeView?.closeSocket()
+        SVProgressHUD.dismiss()
     }
     
     

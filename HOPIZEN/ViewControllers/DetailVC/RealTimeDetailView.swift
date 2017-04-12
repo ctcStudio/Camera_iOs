@@ -155,7 +155,7 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     func socketDidConnect() {
         self.sendLoginReadTime()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             // your code here
             self.sendRealTime()
         }
@@ -168,7 +168,7 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     }
     
     func sendRealTime() {
-        let msg = "@message@yeucauVOD@message@////" + (self.cameraModel?.cameraID)! + "////"
+        let msg = "@message@yeucaulive@message@////" + (self.cameraModel?.cameraID)! + "////"
         self.sk?.sendMessage(toServer: msg, messageType: MessageType.REALTIME)
     }
     
