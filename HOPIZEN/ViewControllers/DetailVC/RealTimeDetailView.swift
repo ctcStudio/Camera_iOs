@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol RealTimeDelegate {
+    
+    func showOrHideGps(isShow:Bool)
+    
+    func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
+}
+
 class RealTimeDetailView: UIView {
     
     var view: UIView!
@@ -19,6 +26,8 @@ class RealTimeDetailView: UIView {
     @IBOutlet weak var heightView: NSLayoutConstraint!
     
     var cameraModel:CameraModel?
+    
+    var delegate:RealTimeDelegate!
     
     var sk:HPZSoketXXXXX?
     var name:String?

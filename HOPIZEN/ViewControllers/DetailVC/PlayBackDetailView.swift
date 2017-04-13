@@ -8,6 +8,13 @@
 
 import UIKit
 
+protocol PlayBackDelegate {
+    
+    func showOrHideGps(isShow:Bool)
+    
+    func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
+}
+
 class PlayBackDetailView: UIView {
     
     @IBOutlet var view: UIView!
@@ -19,6 +26,7 @@ class PlayBackDetailView: UIView {
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var heightView: NSLayoutConstraint!
     
+    var delegate:PlayBackDelegate!
     var playBack:PlayBackModel?
     var timePlay:Int16 = 0
     var speed: Int8 = 1
