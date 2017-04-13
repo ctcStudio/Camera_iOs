@@ -128,7 +128,7 @@ class RealTimeDetailView: UIView {
     
     @IBAction func clickGps(_ sender: UIButton) {
         if(self.delegate != nil) {
-            self.delegate.showOrHideGps(isShow: !self.mapView.isHidden, camera: cameraModel!)
+            self.delegate.showOrHideGps(isShow: self.mapView.isHidden, camera: cameraModel!)
         }
         if self.mapView.isHidden {
             self.mapView.isHidden = false
