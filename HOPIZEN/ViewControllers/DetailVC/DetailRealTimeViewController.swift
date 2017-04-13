@@ -31,6 +31,7 @@ class DetailRealTimeViewController: UIViewController {
             let realTimeView = RealTimeDetailView.init(frame: viewSize)
             realTimeView.cameraModel = cameraModel
             realTimeView.isHidden = false
+            realTimeView.delegate = self
             self.realTimeViewList.append(realTimeView)
             self.scrollView.addSubview(realTimeView)
             scrollHeight = scrollHeight + height
@@ -79,4 +80,38 @@ class DetailRealTimeViewController: UIViewController {
         self.closeAllSocker()
     }
     
+}
+
+extension DetailRealTimeViewController: RealTimeDelegate {
+    
+    func showFullMap(camera: CameraModel) {
+        
+    }
+    
+    func showOrHideGps(isShow: Bool, camera: CameraModel) {
+        let screenSize: CGRect = UIScreen.main.bounds
+        var scrollHeight:CGFloat = 0
+        for i in 0..<realTimeViewList.count {
+            let realTimeView = realTimeViewList[i]
+            if(realTimeView.cameraModel?.cameraID == camera.cameraID) {
+                let height = screenSize.width + 70 + screenSize.width
+                let viewSize:CGRect = CGRect.init(x: 0, y: scrollHeight, width: screenSize.width, height: height)
+                realTimeView.frame = viewSize
+                scrollHeight = scrollHeight + height
+            } else {
+                let height = screenSize.width + 70
+                let viewSize:CGRect = CGRect.init(x: 0, y: scrollHeight, width: screenSize.width, height: height)
+                realTimeView.frame = viewSize
+                realTimeView.mapView.isHidden = true
+                scrollHeight = scrollHeight + height
+            }
+        }
+        let scrollSize:CGSize = CGSize.init(width: screenSize.width, height: scrollHeight)
+        self.scrollView.contentSize = scrollSize
+        self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+    }
+    
+    func updateLoaction(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
+        
+    }
 }

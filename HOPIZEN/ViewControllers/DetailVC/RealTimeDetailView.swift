@@ -10,7 +10,9 @@ import UIKit
 
 protocol RealTimeDelegate {
     
-    func showOrHideGps(isShow:Bool)
+    func showOrHideGps(isShow:Bool, camera:CameraModel)
+    
+    func showFullMap(camera:CameraModel)
     
     func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
 }
@@ -28,6 +30,7 @@ class RealTimeDetailView: UIView {
     var cameraModel:CameraModel?
     
     var delegate:RealTimeDelegate!
+    var hasShowFullMap:Bool! = false
     
     var sk:HPZSoketXXXXX?
     var name:String?
@@ -124,6 +127,9 @@ class RealTimeDetailView: UIView {
     }
     
     @IBAction func clickGps(_ sender: UIButton) {
+        if(self.delegate != nil) {
+            self.delegate.showOrHideGps(isShow: !self.mapView.isHidden, camera: cameraModel!)
+        }
         if self.mapView.isHidden {
             self.mapView.isHidden = false
             self.sethiddenView(isHidden: false)
@@ -232,7 +238,12 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
                 let gpsInfo:GpsInfoModel! = GpsInfoModel()
                 let isParse = gpsInfo?.paserStringRespon(message: gpsTrim)
                 if isParse! {
-                    self.loadCameraPosition(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
+                    if(self.delegate != nil && self.hasShowFullMap) {
+                        self.delegate.updateLoaction(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo.log)!)
+                    }
+                    if(self.mapView.isHidden == false) {
+                        self.loadCameraPosition(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
+                    }
                     speed  = String(format: "%.2f", gpsInfo.getSpeedKM()) +  " km/h"
                     let dateFormatter = DateFormatter()
                     dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

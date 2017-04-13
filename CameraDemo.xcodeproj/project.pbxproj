@@ -24,8 +24,6 @@
 		6C358B0A1E94FFD2002BA88C /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C358B081E94FFD2002BA88C /* DetailViewController.swift */; };
 		6C358B0B1E94FFD2002BA88C /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6C358B091E94FFD2002BA88C /* DetailViewController.xib */; };
 		6C358B0D1E963979002BA88C /* PlayBackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C358B0C1E963979002BA88C /* PlayBackModel.swift */; };
-		6CA949081E97AB2800FA6B98 /* RealtimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA949071E97AB2800FA6B98 /* RealtimeView.swift */; };
-		6CA9490A1E97AB3700FA6B98 /* RealtimeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CA949091E97AB3700FA6B98 /* RealtimeView.xib */; };
 		6CA9490C1E97AEF700FA6B98 /* PlayBackDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CA9490B1E97AEF700FA6B98 /* PlayBackDetailView.swift */; };
 		6CA9490E1E97AF1400FA6B98 /* PlayBackDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6CA9490D1E97AF1400FA6B98 /* PlayBackDetailView.xib */; };
 		C2058F4B1E0BC8E000593AC1 /* SocketConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2058F4A1E0BC8E000593AC1 /* SocketConstant.swift */; };
@@ -73,8 +71,6 @@
 		6C358B081E94FFD2002BA88C /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailViewController.swift; path = DetailVC/DetailViewController.swift; sourceTree = "<group>"; };
 		6C358B091E94FFD2002BA88C /* DetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailViewController.xib; path = DetailVC/DetailViewController.xib; sourceTree = "<group>"; };
 		6C358B0C1E963979002BA88C /* PlayBackModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayBackModel.swift; sourceTree = "<group>"; };
-		6CA949071E97AB2800FA6B98 /* RealtimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealtimeView.swift; path = DetailVC/RealtimeView.swift; sourceTree = "<group>"; };
-		6CA949091E97AB3700FA6B98 /* RealtimeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RealtimeView.xib; path = DetailVC/RealtimeView.xib; sourceTree = "<group>"; };
 		6CA9490B1E97AEF700FA6B98 /* PlayBackDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayBackDetailView.swift; path = DetailVC/PlayBackDetailView.swift; sourceTree = "<group>"; };
 		6CA9490D1E97AF1400FA6B98 /* PlayBackDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayBackDetailView.xib; path = DetailVC/PlayBackDetailView.xib; sourceTree = "<group>"; };
 		BED55A68B15206BF1FE6B98B /* Pods_CameraDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CameraDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,8 +156,6 @@
 				6C30C6BB1E9E498F0097FE52 /* RealTimeDetailView.xib */,
 				6C358B081E94FFD2002BA88C /* DetailViewController.swift */,
 				6C358B091E94FFD2002BA88C /* DetailViewController.xib */,
-				6CA949071E97AB2800FA6B98 /* RealtimeView.swift */,
-				6CA949091E97AB3700FA6B98 /* RealtimeView.xib */,
 				6CA9490B1E97AEF700FA6B98 /* PlayBackDetailView.swift */,
 				6CA9490D1E97AF1400FA6B98 /* PlayBackDetailView.xib */,
 				6C30C6BE1E9E4D3D0097FE52 /* DetailRealTimeViewController.swift */,
@@ -474,7 +468,6 @@
 				6C358B061E94F423002BA88C /* PlayBackViewController.xib in Resources */,
 				6CA9490E1E97AF1400FA6B98 /* PlayBackDetailView.xib in Resources */,
 				6C358AFF1E93DC37002BA88C /* HomeTableViewCell.xib in Resources */,
-				6CA9490A1E97AB3700FA6B98 /* RealtimeView.xib in Resources */,
 				C2CBAD6C1E0273FF00BA7DA1 /* mappingJson.geojson in Resources */,
 				6C358B0B1E94FFD2002BA88C /* DetailViewController.xib in Resources */,
 				C27F24BC1DFFA1EA009A81B6 /* HPZSlidingMenuViewController.xib in Resources */,
@@ -561,7 +554,6 @@
 				6C30C6B71E9DBF650097FE52 /* GpsInfoModel.swift in Sources */,
 				6C358B0A1E94FFD2002BA88C /* DetailViewController.swift in Sources */,
 				6C30C6BC1E9E498F0097FE52 /* RealTimeDetailView.swift in Sources */,
-				6CA949081E97AB2800FA6B98 /* RealtimeView.swift in Sources */,
 				6C358B051E94F423002BA88C /* PlayBackViewController.swift in Sources */,
 				C27F249C1DFF98B5009A81B6 /* HPZWebservice.swift in Sources */,
 				C27F24AF1DFF9EEB009A81B6 /* HPZBaseEntity.swift in Sources */,

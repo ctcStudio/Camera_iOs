@@ -10,7 +10,7 @@ import UIKit
 
 protocol PlayBackDelegate {
     
-    func showOrHideGps(isShow:Bool)
+    func showFullGps(camera:CameraModel)
     
     func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
 }
@@ -38,6 +38,7 @@ class PlayBackDetailView: UIView {
     var host:String?
     var hasGetAddress:Bool! = false
     var hasChangeTimePlay:Bool! = false
+    var hasShowFullMap:Bool! = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -281,7 +282,12 @@ extension PlayBackDetailView:HPZSoketXXXXXDelegate {
                 let gpsInfo:GpsInfoModel! = GpsInfoModel()
                 let isParse = gpsInfo?.paserStringRespon(message: gpsTrim)
                 if isParse! {
-                    self.loadCameraPosition(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
+                    if(self.delegate != nil && self.hasShowFullMap) {
+                        self.delegate.updateLoaction(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo.log)!)
+                    }
+                    if(self.mapView.isHidden == false) {
+                        self.loadCameraPosition(latitude: (gpsInfo?.lat)!, longitude: (gpsInfo?.log)!)
+                    }
                     speed  = String(format: "%.2f", gpsInfo.getSpeedKM()) +  " km/h"
                     
                     if(self.hasGetAddress == false) {
