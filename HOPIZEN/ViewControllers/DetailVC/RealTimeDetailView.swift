@@ -10,7 +10,7 @@ import UIKit
 
 class RealTimeDetailView: UIView {
     
-    @IBOutlet var view: UIView!
+    var view: UIView!
     @IBOutlet weak var ImagePlayBack: UIImageView!
     @IBOutlet weak var cameraName: UILabel!
     @IBOutlet weak var cameraInfo: UILabel!
@@ -29,13 +29,11 @@ class RealTimeDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
-        self.loadCameraPosition(latitude: -33.86, longitude: 151.20)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
-        self.loadCameraPosition(latitude: -33.86, longitude: 151.20)
     }
     
     func xibSetup() {
@@ -142,7 +140,6 @@ class RealTimeDetailView: UIView {
             NSLog("Login: error input data");
             return
         }
-        SVProgressHUD.show()
         self.sk?.close()
         self.sk = nil
         self.sk = HPZSoketXXXXX(host:host , port: 5050);
@@ -162,7 +159,6 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     }
     
     func sendLoginReadTime() {
-        SVProgressHUD.show()
         let mMessage:NSString = "@haicuongplayer@:"+name!+":"+pass! as NSString
         self.sk?.sendMessage(toServer: mMessage as String!, messageType: MessageType.LOGIN_REALTIME)
     }
@@ -187,7 +183,6 @@ extension RealTimeDetailView:HPZSoketXXXXXDelegate {
     func messageReceivedData(_ result: Data!, messageType type: MessageType) {
         switch type {
         case MessageType.REALTIME:
-            SVProgressHUD.dismiss()
             self.parseRealTime(result: result)
         default:
             break

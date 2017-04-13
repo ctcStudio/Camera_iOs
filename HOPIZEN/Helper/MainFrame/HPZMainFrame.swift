@@ -7,13 +7,15 @@
 //
 
 import UIKit
-import UISidebarViewController
+// import UISidebarViewController
 
-var mainFrame:UISidebarViewController?
+// var mainFrame:UISidebarViewController?
+var navigationView:HPZCutomNavigationController?
 
 class HPZMainFrame: NSObject {
     static func makeNewMainFrame () -> UIViewController! {
-        let center = self.makeCenterNavi()
+        navigationView = self.makeCenterNavi()
+        /*
         let left = self.makeSideMenu()
         mainFrame = UISidebarViewController(center: center, andSidebarViewController: left)
         mainFrame!.sidebarWidth = screenWidth * 0.85
@@ -23,40 +25,43 @@ class HPZMainFrame: NSObject {
         
         left.view.layoutIfNeeded()
         return mainFrame
+        */
+        return navigationView
     }
     
+//    
+//    static func makeSideMenu () -> HPZSlidingMenuViewController {
+//        let sideMenu:HPZSlidingMenuViewController = HPZSlidingMenuViewController(nibName: "HPZSlidingMenuViewController", bundle: nil)
+//        return sideMenu
+//    }
     
-    static func makeSideMenu () -> HPZSlidingMenuViewController {
-        let sideMenu:HPZSlidingMenuViewController = HPZSlidingMenuViewController(nibName: "HPZSlidingMenuViewController", bundle: nil)
-        return sideMenu
-    }
-    
-    static func makeCenterNavi () -> UINavigationController {// 84 86 172
+    static func makeCenterNavi () -> HPZCutomNavigationController {// 84 86 172
         let naviRoot = LoginViewController(nibName: "LoginViewController", bundle: nil)
         let navi = HPZCutomNavigationController(rootViewController: naviRoot)
         navi.navigationBar.isTranslucent = false
         return navi
     }
     
-    static func hidenMenu() {
-        if mainFrame?.sidebarIsShowing == true {
-            mainFrame!.toggleSidebar(nil)
-        }
-    }
-    
-    static func showMenu() {
-        if mainFrame?.sidebarIsShowing == false {
-            mainFrame!.toggleSidebar(nil)
-        }
-    }
-    
-    static func menuBtnTouched(sender:UIButton!){
-        mainFrame!.toggleSidebar(nil)
-    }
-    
+//    static func hidenMenu() {
+//        if mainFrame?.sidebarIsShowing == true {
+//            mainFrame!.toggleSidebar(nil)
+//        }
+//    }
+//    
+//    static func showMenu() {
+//        if mainFrame?.sidebarIsShowing == false {
+//            mainFrame!.toggleSidebar(nil)
+//        }
+//    }
+//    
+//    static func menuBtnTouched(sender:UIButton!){
+//        mainFrame!.toggleSidebar(nil)
+//    }
+//    
     static func showLoginVC() -> Void {
         let vc = LoginViewController(nibName: "LoginViewController", bundle: nil)
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        // (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
     
@@ -67,29 +72,33 @@ class HPZMainFrame: NSObject {
         vc.speed = speed
         vc.cameraGroupList = cameraGroup
         vc.playBackList = playBackList
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        //(mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
     
     static func showHomeVC(cameraGroup: [CameraGroup]) -> Void {
         let vc = HomeTableViewController(nibName: "HomeTableViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        //(mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
     
-    static func showRealTimeDetailVC(cameraGroup: [CameraGroup], cameraModel: CameraModel) -> Void {
+    static func showRealTimeDetailVC(cameraGroup: [CameraGroup], cameraModel: [CameraModel]) -> Void {
         let vc = DetailRealTimeViewController(nibName: "DetailRealTimeViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
-        vc.cameraModel = cameraModel
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        vc.cameraModelList = cameraModel
+        //(mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
     
     static func showPlayBackVC(cameraGroup: [CameraGroup]) -> Void {
         let vc = PlayBackViewController(nibName: "PlayBackViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        //(mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
     
@@ -97,23 +106,31 @@ class HPZMainFrame: NSObject {
         let vc = PlayBackViewController(nibName: "PlayBackViewController", bundle: nil)
         vc.cameraGroupList = cameraGroup
         vc.playBackList = playBackList
-        (mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        //(mainFrame?.centerVC as! UINavigationController).viewControllers = [vc]
+        (navigationView!).viewControllers = [vc]
         
     }
 
 
     
     static func getNavi() -> HPZCutomNavigationController{
-        let navi = mainFrame?.centerVC as! HPZCutomNavigationController
-        return navi
+        // let navi = mainFrame?.centerVC as! HPZCutomNavigationController
+        return navigationView!
     }
     
-    static func addMenuBtn() -> Void {
-        self.getNavi().addLeftBtnWithBackgroundImage(bgImg: UIImage(named: "menu"), title: "", titleColor: UIColor.black, targer: self, action: #selector(HPZMainFrame.menuBtnTouched(sender:)))
+    static func addBackBtn(target:AnyObject?, action: Selector) -> Void {
+        self.getNavi().addLeftBtnWithBackgroundImage(bgImg: UIImage(named: "image_navi_back"), title: "", titleColor: UIColor.white, targer: target, action: action)
+    }
+    
+    static func addNaviHomeBtn(target:AnyObject?,action: Selector) -> Void {
+        self.getNavi().addCenterBtnWithBackgroundImage(bgImg: UIImage(named: "image_navi_oto"), title: "", titleColor: UIColor.white, targer: target, action: action)
     }
 
-    
     static func addMenuLeft(title:String, titleColor: UIColor?, target:AnyObject?, action: Selector) {
         self.getNavi().addLeftBtnWithTitle(title: title, titleColor: titleColor, target: target, action: action)
+    }
+    
+    static func addMenuRight(title:String, titleColor: UIColor?, target:AnyObject?, action: Selector) {
+        self.getNavi().addRightBtnWithTitle(title: title, titleColor: titleColor, target: target, action: action)
     }
 }

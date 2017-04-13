@@ -87,6 +87,18 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.selectedSpeedString = self.speedString[0]
         self.selectedSpeed = self.speed[0]
         self.selectSpeed.setTitle(selectedSpeedString, for: UIControlState.normal)
+        
+        HPZMainFrame.addBackBtn(target: self, action: #selector(clickBack(_:)))
+        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+    }
+    
+    func homeAction(_ sender: AnyObject) {
+        HPZMainFrame.showHomeVC(cameraGroup:cameraGroupList)
+    }
+
+    
+    func clickBack(_ sender:UIButton!){
+        HPZMainFrame.showHomeVC(cameraGroup:cameraGroupList)
     }
     
     override func viewDidDisappear(_ animated: Bool) {

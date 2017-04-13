@@ -12,7 +12,7 @@ class CameraModel: HPZBaseEntity {
     var cameraGroup:String?
     var cameraName:String?
     var cameraID:String?
-    var isOnline:Bool?
+    var isOnline:Bool? = false
     
     
     override func paserStringRespon(message: String) -> Bool {

@@ -149,10 +149,10 @@ class PlayBackDetailView: UIView {
         SVProgressHUD.show()
         self.sendStopVodData()
         self.timePlay = Int16(roundedStepValue)
-        self.sendGetVodData()
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             // your code here
+            self.sendGetVodData()
             self.hasChangeTimePlay = false
         }
     }

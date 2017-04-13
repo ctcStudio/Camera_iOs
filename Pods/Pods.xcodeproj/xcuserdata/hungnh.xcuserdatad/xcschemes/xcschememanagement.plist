@@ -69,24 +69,9 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UISidebarViewController.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>05E78D4E55C50801885BC958DE42FCCF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>092F03D279E3B2BE441DF102739C859D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>102A71A7E162E9E46CCD8250B1BC9130</key>
 		<dict>
 			<key>primary</key>
@@ -97,7 +82,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3D3015F36E3E5A7E465A78740B23F7CC</key>
+		<key>2A701E015691786D5712D905A6FD2B72</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3531C509315B33AA8B18E1D03F6249B5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,12 +97,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5867B24C02B831B410B372AB68AB6FD5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8A0100EF8C23DE9FB340602D48BFC977</key>
+		<key>7A38492746462E70F1E57132E73E3C51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -127,7 +112,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD12A1762988E8FDC73306EE6FE30943</key>
+		<key>BCECAF8D91F679290EF5967F30F5B676</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,12 +122,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D3D6CB4514D23C8102B3BBE735B9621D</key>
+		<key>DAA3AE044A9B8094A6D22E2AAD4E86D2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F1BE7610FED78E0900E51C7F64FAD68A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

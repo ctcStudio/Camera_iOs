@@ -19,12 +19,31 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_connect" translatesAutoresizingMaskIntoConstraints="NO" id="22K-EV-L2K">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="67C-aU-ENa">
                         <rect key="frame" x="10" y="5" width="45" height="45"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="camera_connect" translatesAutoresizingMaskIntoConstraints="NO" id="22K-EV-L2K">
+                                <rect key="frame" x="0.0" y="0.0" width="45" height="45"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JIz-U5-9Lw">
+                                <rect key="frame" x="30" y="30" width="15" height="15"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="JIz-U5-9Lw" secondAttribute="height" multiplier="1:1" id="q0w-2C-we2"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="22K-EV-L2K" secondAttribute="height" multiplier="1:1" id="lR5-Lq-g0Q"/>
+                            <constraint firstItem="22K-EV-L2K" firstAttribute="leading" secondItem="67C-aU-ENa" secondAttribute="leading" id="24a-lA-Fy4"/>
+                            <constraint firstAttribute="trailing" secondItem="22K-EV-L2K" secondAttribute="trailing" id="8uQ-wK-qAT"/>
+                            <constraint firstItem="22K-EV-L2K" firstAttribute="top" secondItem="67C-aU-ENa" secondAttribute="top" id="HbG-Y1-3gL"/>
+                            <constraint firstAttribute="bottom" secondItem="JIz-U5-9Lw" secondAttribute="bottom" id="VjX-y0-eiE"/>
+                            <constraint firstItem="JIz-U5-9Lw" firstAttribute="top" secondItem="67C-aU-ENa" secondAttribute="top" constant="30" id="c0G-zB-nbg"/>
+                            <constraint firstAttribute="width" secondItem="67C-aU-ENa" secondAttribute="height" multiplier="1:1" id="ebd-vb-jDw"/>
+                            <constraint firstAttribute="bottom" secondItem="22K-EV-L2K" secondAttribute="bottom" id="kpT-CF-r1b"/>
+                            <constraint firstAttribute="trailing" secondItem="JIz-U5-9Lw" secondAttribute="trailing" id="uwB-hc-Z8l"/>
                         </constraints>
-                    </imageView>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CEh-24-07K">
                         <rect key="frame" x="65" y="5" width="250" height="45"/>
                         <subviews>
@@ -58,21 +77,21 @@
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="22K-EV-L2K" secondAttribute="bottom" constant="4.5" id="3UZ-fE-dNf"/>
-                    <constraint firstItem="CEh-24-07K" firstAttribute="leading" secondItem="22K-EV-L2K" secondAttribute="trailing" constant="10" id="7to-YQ-5ut"/>
-                    <constraint firstItem="CEh-24-07K" firstAttribute="leading" secondItem="22K-EV-L2K" secondAttribute="trailing" constant="10" id="DRx-9e-9AH"/>
+                    <constraint firstItem="CEh-24-07K" firstAttribute="leading" secondItem="67C-aU-ENa" secondAttribute="trailing" constant="10" id="Epu-qT-UTh"/>
+                    <constraint firstItem="67C-aU-ENa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="FN9-5c-OcS"/>
                     <constraint firstAttribute="bottom" secondItem="CEh-24-07K" secondAttribute="bottom" constant="4.5" id="Kp9-m0-ktB"/>
-                    <constraint firstItem="22K-EV-L2K" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="NhI-QU-dkt"/>
                     <constraint firstItem="CEh-24-07K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="SFt-9m-WOa"/>
-                    <constraint firstItem="22K-EV-L2K" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="a5D-gA-8iz"/>
+                    <constraint firstItem="67C-aU-ENa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="enW-8D-YXc"/>
+                    <constraint firstItem="67C-aU-ENa" firstAttribute="bottom" secondItem="CEh-24-07K" secondAttribute="bottom" id="z4e-PH-ikn"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="cameraId" destination="nNa-CP-LWn" id="81f-lz-TlA"/>
                 <outlet property="cameraName" destination="1ew-vB-wRe" id="95r-un-jfx"/>
-                <outlet property="contentView" destination="H2p-sc-9uM" id="OiL-Mk-Tv2"/>
+                <outlet property="cameraOnline" destination="JIz-U5-9Lw" id="Xq7-kz-xQk"/>
                 <outlet property="layoutView" destination="H2p-sc-9uM" id="8Sc-Lb-Vll"/>
             </connections>
+            <point key="canvasLocation" x="33" y="55.5"/>
         </tableViewCell>
     </objects>
     <resources>

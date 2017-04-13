@@ -78,6 +78,11 @@ class HPZCutomNavigationController: UINavigationController {
         self.topViewController?.navigationItem.rightBarButtonItem = barBtn
     }
     
+    func addCenterBtnWithBackgroundImage(bgImg: UIImage!, title:String?, titleColor:UIColor?, targer:AnyObject?, action:Selector) -> Void {
+        let barBtn: UIButton = createButtonWithBackgroundImage(img: bgImg!, title: title, titleColor: titleColor, targer: targer, action: action)
+        self.topViewController?.navigationItem.titleView = barBtn
+    }
+    
     func addRightBtnWithTitle(title:String?, titleColor:UIColor?, target:AnyObject?, action:Selector) -> Void {
         let barBtn = UIBarButtonItem(title: title, style: .plain, target: target, action:action)
         barBtn.setTitleTextAttributes([NSForegroundColorAttributeName : titleColor!], for: UIControlState.normal)
@@ -124,7 +129,8 @@ class HPZCutomNavigationController: UINavigationController {
     }
     
     func addBackBtn( targer:AnyObject?, action:Selector) -> Void {
-        let barBtn:UIBarButtonItem? = self.barButtonWithImage(img: UIImage(named: "ic_back"), targer: targer, action: action)
+        let padding = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+        let barBtn:UIBarButtonItem? = self.barButtonWithImagePadding(img: UIImage(named: "ic_back"), padding: padding, targer: targer, action: action)
         self.topViewController?.navigationItem.leftBarButtonItem = barBtn
     }
     
@@ -132,6 +138,15 @@ class HPZCutomNavigationController: UINavigationController {
         let width:CGFloat = (img?.size.width)!
         let button = UIButton(frame:CGRect(x: 0, y: 0, width: width, height: img!.size.height))
         button.setImage(img, for: .normal)
+        button.addTarget(targer, action: action, for: .touchUpInside)
+        return UIBarButtonItem(customView: button)
+    }
+    
+    func barButtonWithImagePadding(img:UIImage?,padding:UIEdgeInsets?, targer:AnyObject?, action:Selector) -> UIBarButtonItem {
+        let width:CGFloat = (img?.size.width)!
+        let button = UIButton(frame:CGRect(x: 0, y: 0, width: width, height: img!.size.height))
+        button.setImage(img, for: .normal)
+        button.titleEdgeInsets = padding!
         button.addTarget(targer, action: action, for: .touchUpInside)
         return UIBarButtonItem(customView: button)
     }
@@ -144,6 +159,16 @@ class HPZCutomNavigationController: UINavigationController {
         button.setTitleColor(titleColor, for: .normal)
         button.addTarget(targer, action: action, for: .touchUpInside)
         return UIBarButtonItem(customView: button)
+    }
+    
+    func createButtonWithBackgroundImage(img:UIImage, title:String?, titleColor:UIColor?, targer:AnyObject?, action:Selector) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        button.setBackgroundImage(img, for: .normal)
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(titleColor, for: .normal)
+        button.addTarget(targer, action: action, for: .touchUpInside)
+        return button
     }
     
     
@@ -181,6 +206,8 @@ class HPZCutomNavigationController: UINavigationController {
     func removeRightButton() {
         self.topViewController?.navigationItem.rightBarButtonItem = nil
     }
-
-
+    
+    func removeCenterButton() {
+        self.topViewController?.navigationItem.titleView = nil
+    }
 }

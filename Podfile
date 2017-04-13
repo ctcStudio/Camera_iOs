@@ -7,7 +7,7 @@ target 'CameraDemo' do
 
   # Pods for HOPIZEN
 
-    pod 'UISidebarViewController'
+    #pod 'UISidebarViewController'
     pod 'TPKeyboardAvoiding'
     pod 'Fabric'
     pod 'Crashlytics'

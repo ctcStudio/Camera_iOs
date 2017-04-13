@@ -96,7 +96,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SwiftSocket/SwiftSocket.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIAlertController+Blocks/UIAlertController_Blocks.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/UISidebarViewController/UISidebarViewController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
@@ -111,5 +110,4 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/SwiftSocket/SwiftSocket.framework"
   install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
   install_framework "$BUILT_PRODUCTS_DIR/UIAlertController+Blocks/UIAlertController_Blocks.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/UISidebarViewController/UISidebarViewController.framework"
 fi

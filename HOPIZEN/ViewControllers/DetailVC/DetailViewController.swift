@@ -28,7 +28,6 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
         
         let screenSize: CGRect = UIScreen.main.bounds
         let height = screenSize.width + 30 + 70 + screenSize.width
@@ -45,6 +44,17 @@ class DetailViewController: UIViewController {
         self.scrollView.addSubview(self.playBackView!)
     
         self.playBackView?.initSocket()
+        HPZMainFrame.addBackBtn(target: self, action: #selector(playBack(sender:)))
+        
+        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+    }
+    
+    func homeAction(_ sender: AnyObject) {
+        HPZMainFrame.showHomeVC(cameraGroup:cameraGroupList)
+    }
+    
+    func clickBack(_ sender:UIButton!){
+        HPZMainFrame.showPlayBackVC(cameraGroup: self.cameraGroupList, playBackList: self.playBackList)
     }
     
     func playBack(sender:UIButton!){

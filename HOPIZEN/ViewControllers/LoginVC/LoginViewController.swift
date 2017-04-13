@@ -29,7 +29,7 @@ class LoginViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+    
         let borderWidth:CGFloat = 1.0
     
         let myColor : UIColor = UIColor(red: 60, green: 63, blue: 65)
@@ -58,6 +58,12 @@ class LoginViewController: UIViewController{
         } else {
             self.savePassword.image = UIImage(named: "checkbox_normal_white");
         }
+        
+        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+    }
+    
+    func homeAction(_ sender: AnyObject) {
+        return
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -161,12 +167,12 @@ extension LoginViewController : HPZSoketXXXXXDelegate {
     
     
     private func sendMessageCheckOnline() -> Void {
-        var message = "@message@checkonline@message@"
+        var message = "@message@checkonline@message@////"
         var idString = ""
        
         for value in self.cameraList {
             for camera in value.cameraList {
-                idString = idString + "////" + camera.cameraID!
+                idString = idString + camera.cameraID! + "////"
             }
         }
         

@@ -41,7 +41,6 @@ PODS:
   - SwiftSocket (2.0.1)
   - TPKeyboardAvoiding (1.3)
   - UIAlertController+Blocks (0.9)
-  - UISidebarViewController (1.0.0)
 
 DEPENDENCIES:
   - ActionSheetPicker-3.0
@@ -58,7 +57,6 @@ DEPENDENCIES:
   - SwiftSocket
   - TPKeyboardAvoiding
   - UIAlertController+Blocks
-  - UISidebarViewController
 
 SPEC CHECKSUMS:
   ActionSheetPicker-3.0: d11a4c12c6aaf704b8a3f56d179198c99f3e41e6
@@ -76,8 +74,7 @@ SPEC CHECKSUMS:
   SwiftSocket: 2d814afdc97c89217982f86fd036c1874134a63f
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   UIAlertController+Blocks: b48c673ff60726da468b32ab21bbc7683512d45b
-  UISidebarViewController: afa8867a2201b95d49ffbb12652bb1d7a30d9683
 
-PODFILE CHECKSUM: 88fe091c3889b1700eb3d32070d1201869bd347b
+PODFILE CHECKSUM: c44613bec034c7237882005e92ba146b3eb85fe8
 
 COCOAPODS: 1.1.1

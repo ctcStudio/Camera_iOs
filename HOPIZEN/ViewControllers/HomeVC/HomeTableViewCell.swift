@@ -12,6 +12,7 @@ class HomeTableViewCell: UITableViewCell {
     @IBOutlet weak var cameraName: UILabel!
     @IBOutlet weak var cameraId: UILabel!
     @IBOutlet weak var layoutView: UIView!
+    @IBOutlet weak var cameraOnline: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -30,7 +31,15 @@ class HomeTableViewCell: UITableViewCell {
     }
     
     func showCamera(camera: CameraModel) {
-        cameraName.text = camera.cameraName
-        cameraId.text = camera.cameraID
+        self.cameraName.text = camera.cameraName
+        self.cameraId.text = camera.cameraID
+        var image:UIImage!
+        if(camera.isOnline)! {
+            image = UIImage.init(named: "image_cam_online")
+        } else {
+            image = UIImage.init(named: "image_cam_offline")
+        }
+        
+        self.cameraOnline.image = image
     }
 }

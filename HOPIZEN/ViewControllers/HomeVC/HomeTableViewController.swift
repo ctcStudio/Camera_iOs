@@ -11,24 +11,45 @@ import UIKit
 class HomeTableViewController: UITableViewController {
     
     var cameraGroupList:[CameraGroup] = []
+    var cameraModelList:[CameraModel] = []
+    
+    var sk:HPZSoketXXXXX?
+    var name:String?
+    var pass:String?
+    var host:String?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let defaults = UserDefaults.standard
+        self.host = defaults.string(forKey: defaultsKeys.keyServerAddress)
+        self.name = defaults.string(forKey: defaultsKeys.keyUserName)
+        self.pass = defaults.string(forKey: defaultsKeys.keyPassword)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
         
         let nib = UINib(nibName: "HomeTableViewCell", bundle: nil)
         self.tableView.register(nib, forCellReuseIdentifier:"cameraViewCell")
+        self.tableView.allowsMultipleSelection = true
         
         HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
+        HPZMainFrame.addMenuRight(title: "Realtime", titleColor: UIColor.white, target: self, action: #selector(realTime(sender:)))
+        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+        self.initSocket()
     }
     
+    func homeAction(_ sender: AnyObject) {
+        return
+    }
+
     func playBack(sender:UIButton!){
         HPZMainFrame.showPlayBackVC(cameraGroup:cameraGroupList)
+    }
+    
+    func realTime(sender:UIButton!){
+       self.sendMessageCheckOnline()
     }
     
 
@@ -63,56 +84,150 @@ class HomeTableViewController: UITableViewController {
         return cameraGroup.groupName!
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cameraGroup = self.cameraGroupList[indexPath.section]
-        let cameraModel = cameraGroup.cameraList[indexPath.item]
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let sr = tableView.indexPathsForSelectedRows {
+            if sr.count == 4 {
+                let alertController = UIAlertController(title: "Oops", message:
+                    "You are limited to 4 selections", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
+                }))
+                self.present(alertController, animated: true, completion: nil)
+                
+                return nil
+            }
+        }
         
-        HPZMainFrame.showRealTimeDetailVC(cameraGroup: self.cameraGroupList, cameraModel: cameraModel)
+        return indexPath
+
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cameraGroup = self.cameraGroupList[indexPath.section]
+//        let cameraModel = cameraGroup.cameraList[indexPath.item]
+//        var listCamera:[CameraModel] = []
+//        listCamera.append(cameraModel)
+//        HPZMainFrame.showRealTimeDetailVC(cameraGroup: self.cameraGroupList, cameraModel: listCamera)
+//    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            if cell.isSelected {
+                cell.accessoryType = .checkmark
+            }
+        }
+        
+        if let sr = tableView.indexPathsForSelectedRows {
+            print("didDeselectRowAtIndexPath selected rows:\(sr)")
+            let cameraGroup = self.cameraGroupList[indexPath.section]
+            let cameraModel = cameraGroup.cameraList[indexPath.item]
+            if self.cameraModelList.contains(cameraModel) == false {
+                self.cameraModelList.append(cameraModel)
+            }
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+ 
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
+            cell.accessoryType = .none
+        }
+        
+        if let sr = tableView.indexPathsForSelectedRows {
+            print("didDeselectRowAtIndexPath selected rows:\(sr)")
+            let cameraGroup = self.cameraGroupList[indexPath.section]
+            let cameraModel = cameraGroup.cameraList[indexPath.item]
+            let index = self.cameraModelList.index(of: cameraModel)
+            self.cameraModelList.remove(at: index!)
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.sk?.close()
+        self.sk = nil
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
+    
+    
+    func initSocket() {
+        if((host?.isEmpty)!
+            || (name?.isEmpty)!
+            || (pass?.isEmpty)!) {
+            NSLog("Login: error input data");
+            return
+        }
+        SVProgressHUD.show()
+        self.sk?.close()
+        self.sk = nil
+        self.sk = HPZSoketXXXXX(host:host , port: 5050);
+        self.sk?.delegate = self
+        
     }
-    */
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+extension HomeTableViewController : HPZSoketXXXXXDelegate {
+    func socketDidConnect() {
+        print("socket Connected")
+        self.pSendMessage()
+        
     }
-    */
+    func messageReceived(_ message: String!, messageType type: MessageType) {
+        //        print("message:\(message)")
+        switch type {
+        case MessageType.LOGIN:
+            SVProgressHUD.dismiss()
+            break
+        case MessageType.ONLINE:
+            SVProgressHUD.dismiss()
+            self.fillterCameraOnline(messsage: message)
+            break
+        default:
+            break
+        }
+    }
+    
+    
+    private func pSendMessage() -> Void {
+        let mMessage:NSString = "@haicuong@:"+name!+":"+pass! as NSString
+        self.sk?.sendMessage(toServer: mMessage as String!, messageType: MessageType.LOGIN)
+    }
+    
+    
+    func sendMessageCheckOnline() -> Void {
+        SVProgressHUD.show()
+        var message = "@message@checkonline@message@////"
+        var idString = ""
+        
+        for camera in self.cameraModelList {
+            idString = idString + camera.cameraID! + "////"
+        }
+        
+        message = message + idString
+        self.sk?.sendMessage(toServer: message as String!, messageType: MessageType.ONLINE)
+    }
+    
+    private func fillterCameraOnline(messsage:String) -> Void {
+        var listCameOnline:[CameraModel] = []
+        if messsage.contains(find: "@message@checkonline@message@")  {
+            let splitDataDetail = messsage.components(separatedBy: "////")
+            for camera in cameraModelList {
+                for value in splitDataDetail {
+                    if(camera.cameraID == value) {
+                        camera.isOnline = true
+                        listCameOnline.append(camera)
+                        break
+                    }
+                }
+            }
+            if(listCameOnline.count > 0) {
+                HPZMainFrame.showRealTimeDetailVC(cameraGroup: cameraGroupList, cameraModel: listCameOnline)
+            } else {
+                let alertController = UIAlertController(title: "Oops", message:
+                    "Camera offline", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: {action in
+                }))
+                self.present(alertController, animated: true, completion: nil)
+            }
+            SVProgressHUD.dismiss()
+        }
+    }
     
 }
+

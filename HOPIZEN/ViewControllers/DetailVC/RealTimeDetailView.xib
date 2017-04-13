@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -111,7 +111,6 @@
             </subviews>
             <constraints>
                 <constraint firstItem="zGx-fw-Qzp" firstAttribute="leading" secondItem="fN7-XA-ddr" secondAttribute="leading" id="5jB-Ce-d4b"/>
-                <constraint firstItem="zGx-fw-Qzp" firstAttribute="top" secondItem="HhQ-wI-P9B" secondAttribute="bottom" id="DBg-lU-Odf"/>
                 <constraint firstItem="njL-Rb-vhp" firstAttribute="leading" secondItem="fN7-XA-ddr" secondAttribute="leading" id="c67-VJ-TnR"/>
                 <constraint firstAttribute="trailing" secondItem="zGx-fw-Qzp" secondAttribute="trailing" id="cYE-GG-pef"/>
                 <constraint firstAttribute="trailing" secondItem="HhQ-wI-P9B" secondAttribute="trailing" id="chA-eb-qBN"/>
@@ -119,6 +118,7 @@
                 <constraint firstItem="HhQ-wI-P9B" firstAttribute="leading" secondItem="fN7-XA-ddr" secondAttribute="leading" id="dta-Rd-lm2"/>
                 <constraint firstAttribute="trailing" secondItem="njL-Rb-vhp" secondAttribute="trailing" id="egB-ta-FEz"/>
                 <constraint firstItem="HhQ-wI-P9B" firstAttribute="leading" secondItem="fN7-XA-ddr" secondAttribute="leading" id="fDU-4Y-ZiY"/>
+                <constraint firstItem="HhQ-wI-P9B" firstAttribute="top" secondItem="njL-Rb-vhp" secondAttribute="bottom" id="hw8-JJ-lTh"/>
                 <constraint firstAttribute="bottom" secondItem="zGx-fw-Qzp" secondAttribute="bottom" constant="35" id="u7P-V2-IAf"/>
                 <constraint firstAttribute="trailing" secondItem="HhQ-wI-P9B" secondAttribute="trailing" id="wby-j7-RgC"/>
             </constraints>
