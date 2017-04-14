@@ -103,7 +103,7 @@
 		C27F24BF1DFFA2B4009A81B6 /* HPZCutomNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HPZCutomNavigationController.swift; sourceTree = "<group>"; };
 		C27F24C11DFFA32F009A81B6 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LoginViewController.swift; path = ../LoginVC/LoginViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		C27F24C21DFFA32F009A81B6 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = ../LoginVC/LoginViewController.xib; sourceTree = "<group>"; };
-		C27F24C51DFFA449009A81B6 /* HOPIZEN.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = HOPIZEN.entitlements; sourceTree = "<group>"; };
+		C27F24C51DFFA449009A81B6 /* CAMERA.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CAMERA.entitlements; sourceTree = "<group>"; };
 		C2CBAD6B1E0273FF00BA7DA1 /* mappingJson.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mappingJson.geojson; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,7 +203,7 @@
 		C27F24751DFF965E009A81B6 = {
 			isa = PBXGroup;
 			children = (
-				C27F24801DFF965E009A81B6 /* HOPIZEN */,
+				C27F24801DFF965E009A81B6 /* Camera */,
 				C27F247F1DFF965E009A81B6 /* Products */,
 				503005CA6C9E09F3B583D26F /* Pods */,
 				BAE369B0C67A4FF53593091D /* Frameworks */,
@@ -218,10 +218,10 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C27F24801DFF965E009A81B6 /* HOPIZEN */ = {
+		C27F24801DFF965E009A81B6 /* Camera */ = {
 			isa = PBXGroup;
 			children = (
-				C27F24C51DFFA449009A81B6 /* HOPIZEN.entitlements */,
+				C27F24C51DFFA449009A81B6 /* CAMERA.entitlements */,
 				C27F24B21DFF9F39009A81B6 /* Application */,
 				C27F24AB1DFF9D88009A81B6 /* Model */,
 				C27F24951DFF9722009A81B6 /* Helper */,
@@ -229,6 +229,7 @@
 				C27F24931DFF9687009A81B6 /* ViewControllers */,
 				C2CBAD6A1E0273C000BA7DA1 /* Tests */,
 			);
+			name = Camera;
 			path = HOPIZEN;
 			sourceTree = "<group>";
 		};
@@ -682,7 +683,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HOPIZEN/HOPIZEN.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
 				DEVELOPMENT_TEAM = 8HS7BD5X88;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -700,7 +701,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = HOPIZEN/HOPIZEN.entitlements;
+				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
 				DEVELOPMENT_TEAM = 8HS7BD5X88;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

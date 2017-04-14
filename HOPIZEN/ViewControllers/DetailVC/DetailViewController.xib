@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController" customModule="CameraDemo" customModuleProvider="target">
             <connections>
+                <outlet property="mapView" destination="UNr-cg-v6i" id="lcF-LY-OZO"/>
                 <outlet property="scrollView" destination="CB5-Ql-WHm" id="ox2-83-6y6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="Shd-6O-1nF"/>
             </connections>
@@ -23,12 +24,20 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CB5-Ql-WHm">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                 </scrollView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UNr-cg-v6i" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="UNr-cg-v6i" secondAttribute="bottom" id="6j2-LV-WFI"/>
+                <constraint firstItem="UNr-cg-v6i" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="EiY-Re-X8v"/>
                 <constraint firstAttribute="trailing" secondItem="CB5-Ql-WHm" secondAttribute="trailing" id="gcb-P5-Dnl"/>
                 <constraint firstAttribute="bottom" secondItem="CB5-Ql-WHm" secondAttribute="bottom" id="lT7-hr-VCy"/>
                 <constraint firstItem="CB5-Ql-WHm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nNS-GM-UHY"/>
+                <constraint firstItem="UNr-cg-v6i" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sQE-9o-oam"/>
+                <constraint firstAttribute="trailing" secondItem="UNr-cg-v6i" secondAttribute="trailing" id="u6H-ST-Tcd"/>
                 <constraint firstItem="CB5-Ql-WHm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wMX-6n-nab"/>
             </constraints>
             <point key="canvasLocation" x="25" y="52"/>

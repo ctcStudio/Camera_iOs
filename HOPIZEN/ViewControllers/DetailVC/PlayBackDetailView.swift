@@ -10,12 +10,12 @@ import UIKit
 
 protocol PlayBackDelegate {
     
-    func showFullGps(camera:CameraModel)
+    func showFullGps(playback:PlayBackModel)
     
     func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
 }
 
-class PlayBackDetailView: UIView {
+class PlayBackDetailView: UIView, GMSMapViewDelegate {
     
     @IBOutlet var view: UIView!
     @IBOutlet weak var ImagePlayBack: UIImageView!
@@ -43,13 +43,11 @@ class PlayBackDetailView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.xibSetup()
-        self.loadCameraPosition(latitude: -33.86, longitude: 151.20)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.xibSetup()
-        self.loadCameraPosition(latitude: -33.86, longitude: 151.20)
     }
     
     func xibSetup() {
@@ -62,6 +60,20 @@ class PlayBackDetailView: UIView {
         self.cameraSlider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
         self.cameraSlider.addTarget(self, action: #selector(sliderValueTouchDown(_:)), for: .touchDown)
         self.cameraSlider.isContinuous = false
+        
+        self.mapView.delegate = self
+    }
+    
+    func clickMapView(tapGestureRecognizer: UITapGestureRecognizer) {
+        if(self.delegate != nil) {
+            self.delegate.showFullGps(playback: self.playBack!)
+        }
+    }
+    
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        if(self.delegate != nil) {
+            self.delegate.showFullGps(playback: self.playBack!)
+        }
     }
     
     func loadViewFromNib() -> UIView {
@@ -116,6 +128,7 @@ class PlayBackDetailView: UIView {
     }
     
     func loadCameraPosition(latitude:CLLocationDegrees, longitude: CLLocationDegrees) {
+        self.mapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15.0)
         self.mapView.camera = camera
         let marker = GMSMarker()

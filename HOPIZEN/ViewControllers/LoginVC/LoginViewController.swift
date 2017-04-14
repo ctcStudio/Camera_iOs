@@ -29,6 +29,7 @@ class LoginViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
     
         let borderWidth:CGFloat = 1.0
     

@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         GMSServices.provideAPIKey("AIzaSyCbfd0oi-9sNp0Ut7bexP_1EOVKo_EJaBc")
         self.showMainScreen()
+        SVProgressHUD.setDefaultMaskType(SVProgressHUDMaskType.gradient)
         return true
     }
 

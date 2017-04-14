@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailRealTimeViewController" customModule="CameraDemo" customModuleProvider="target">
             <connections>
+                <outlet property="mapView" destination="Cxp-AQ-0jp" id="qjD-ty-QfQ"/>
                 <outlet property="scrollView" destination="K2a-tm-gZZ" id="n01-Dh-DSm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,13 +24,25 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K2a-tm-gZZ">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </scrollView>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cxp-AQ-0jp" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="K2a-tm-gZZ" secondAttribute="trailing" id="6I7-Dc-FCT"/>
                 <constraint firstItem="K2a-tm-gZZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8Bf-St-WcS"/>
+                <constraint firstItem="K2a-tm-gZZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Bit-qI-rQ9"/>
+                <constraint firstAttribute="bottom" secondItem="Cxp-AQ-0jp" secondAttribute="bottom" id="K8g-bv-4Ig"/>
+                <constraint firstAttribute="bottom" secondItem="K2a-tm-gZZ" secondAttribute="bottom" id="Qcx-h9-coX"/>
                 <constraint firstItem="K2a-tm-gZZ" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="SV6-Pu-Mg4"/>
+                <constraint firstItem="Cxp-AQ-0jp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="afy-3P-sL0"/>
+                <constraint firstAttribute="trailing" secondItem="Cxp-AQ-0jp" secondAttribute="trailing" id="f70-Et-dE3"/>
+                <constraint firstItem="K2a-tm-gZZ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hgD-f4-EaD"/>
                 <constraint firstAttribute="bottom" secondItem="K2a-tm-gZZ" secondAttribute="bottom" id="mNL-nX-y85"/>
                 <constraint firstAttribute="trailing" secondItem="K2a-tm-gZZ" secondAttribute="trailing" id="wh3-2t-Ny1"/>
+                <constraint firstItem="Cxp-AQ-0jp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="z91-D8-MaT"/>
             </constraints>
             <point key="canvasLocation" x="32.5" y="55.5"/>
         </view>

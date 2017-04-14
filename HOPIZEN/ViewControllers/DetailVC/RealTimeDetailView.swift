@@ -17,7 +17,7 @@ protocol RealTimeDelegate {
     func updateLoaction(latitude:CLLocationDegrees, longitude: CLLocationDegrees)
 }
 
-class RealTimeDetailView: UIView {
+class RealTimeDetailView: UIView, GMSMapViewDelegate {
     
     var view: UIView!
     @IBOutlet weak var ImagePlayBack: UIImageView!
@@ -52,7 +52,7 @@ class RealTimeDetailView: UIView {
         self.view = loadViewFromNib()
         self.view.frame = self.bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-
+        self.mapView.delegate = self
         addSubview(view)
     }
     
@@ -62,9 +62,16 @@ class RealTimeDetailView: UIView {
         let nib = UINib(nibName: nibName, bundle: bundle)
         
         let view = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
+        
         return view
     }
     
+    func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
+        if(self.delegate != nil) {
+            self.delegate.showFullMap(camera: self.cameraModel!)
+        }
+    }
+
     func getAddress(latitude:CLLocationDegrees, longitude: CLLocationDegrees) {
         let location = CLLocation.init(latitude: latitude, longitude: longitude)
         
@@ -108,6 +115,7 @@ class RealTimeDetailView: UIView {
     }
     
     func loadCameraPosition(latitude:CLLocationDegrees, longitude: CLLocationDegrees) {
+        self.mapView.clear()
         let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15.0)
         self.mapView.camera = camera
         let marker = GMSMarker()

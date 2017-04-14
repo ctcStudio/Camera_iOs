@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailRealTimeViewController: UIViewController {
+class DetailRealTimeViewController: UIViewController, GMSMapViewDelegate {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -16,6 +16,9 @@ class DetailRealTimeViewController: UIViewController {
     
     var cameraModelList:[CameraModel] = []
     var realTimeViewList:[RealTimeDetailView] = []
+    
+    var cameraShowGps:CameraModel!
+    @IBOutlet weak var mapView: GMSMapView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +44,8 @@ class DetailRealTimeViewController: UIViewController {
         self.scrollView.contentSize = scrollSize
         self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
+         self.mapView.delegate = self
+        
         self.initAllSocket()
         
         HPZMainFrame.addBackBtn(target: self, action: #selector(clickBack(_:)))
@@ -52,7 +57,18 @@ class DetailRealTimeViewController: UIViewController {
     }
     
     func clickBack(_ sender:UIButton!){
-        HPZMainFrame.showHomeVC(cameraGroup:cameraGroupList)
+        if(self.mapView.isHidden) {
+            HPZMainFrame.showHomeVC(cameraGroup:cameraGroupList)
+        } else {
+            self.hiddenMap()
+        }
+    }
+    
+    func hiddenMap() {
+        self.mapView.isHidden = true
+        for realtimeView in realTimeViewList {
+            realtimeView.hasShowFullMap = false
+        }
     }
     
     func initAllSocket() {
@@ -83,9 +99,16 @@ class DetailRealTimeViewController: UIViewController {
 }
 
 extension DetailRealTimeViewController: RealTimeDelegate {
-    
     func showFullMap(camera: CameraModel) {
-        
+        self.cameraShowGps = camera
+        self.mapView.isHidden = false
+        for realtimeView in realTimeViewList {
+            if(realtimeView.cameraModel?.cameraID == camera.cameraID) {
+                realtimeView.hasShowFullMap = true
+            } else {
+                realtimeView.hasShowFullMap = false
+            }
+        }
     }
     
     func showOrHideGps(isShow: Bool, camera: CameraModel) {
@@ -114,6 +137,17 @@ extension DetailRealTimeViewController: RealTimeDelegate {
     }
     
     func updateLoaction(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-        
+        loadCameraPosition(latitude: latitude, longitude:  longitude)
+    }
+    
+    func loadCameraPosition(latitude:CLLocationDegrees, longitude: CLLocationDegrees) {
+        self.mapView.clear()
+        let camera = GMSCameraPosition.camera(withLatitude: latitude, longitude: longitude, zoom: 15.0)
+        self.mapView.camera = camera
+        let marker = GMSMarker()
+        marker.position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        marker.title = self.cameraShowGps?.cameraName
+        marker.snippet = self.cameraShowGps?.cameraID
+        marker.map = mapView
     }
 }
