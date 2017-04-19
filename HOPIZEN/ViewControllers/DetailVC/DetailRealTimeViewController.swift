@@ -50,6 +50,11 @@ class DetailRealTimeViewController: UIViewController, GMSMapViewDelegate {
         
         HPZMainFrame.addBackBtn(target: self, action: #selector(clickBack(_:)))
         HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+        HPZMainFrame.addMenuRight(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
+    }
+    
+    func playBack(sender:UIButton!){
+        HPZMainFrame.showPlayBackVC(cameraGroup:cameraGroupList)
     }
     
     func homeAction(_ sender: AnyObject) {

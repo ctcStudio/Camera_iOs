@@ -82,6 +82,11 @@ class HPZCutomNavigationController: UINavigationController {
         self.topViewController?.navigationItem.titleView = barBtn
     }
     
+    func addCenterWithBackgroundImage(bgImg: UIImage!) -> Void {
+        let barImage: UIImageView = self.createButtonWithBackgroundImage(img: bgImg!)
+        self.topViewController?.navigationItem.titleView = barImage
+    }
+    
     func addRightBtnWithTitle(title:String?, titleColor:UIColor?, target:AnyObject?, action:Selector) -> Void {
         let barBtn = UIBarButtonItem(title: title, style: .plain, target: target, action:action)
         barBtn.setTitleTextAttributes([NSForegroundColorAttributeName : titleColor!], for: UIControlState.normal)
@@ -168,6 +173,13 @@ class HPZCutomNavigationController: UINavigationController {
         button.setTitleColor(titleColor, for: .normal)
         button.addTarget(targer, action: action, for: .touchUpInside)
         return button
+    }
+    
+    func createButtonWithBackgroundImage(img:UIImage) -> UIImageView {
+        let imageHome:UIImageView = UIImageView.init()
+        imageHome.frame = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        imageHome.image = img
+        return imageHome
     }
     
     

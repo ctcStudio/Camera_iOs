@@ -425,10 +425,10 @@
 		C27F24761DFF965E009A81B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = HPZ;
+				CLASSPREFIX = "";
 				LastSwiftUpdateCheck = 0810;
 				LastUpgradeCheck = 0830;
-				ORGANIZATIONNAME = "Thuy Do Thanh";
+				ORGANIZATIONNAME = HungHN;
 				TargetAttributes = {
 					C27F247D1DFF965E009A81B6 = {
 						CreatedOnToolsVersion = 8.1;
@@ -684,12 +684,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8HS7BD5X88;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hiepkhach9x.camerademo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiepkhach9x.camera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HOPIZEN/Application/BridgingHeader/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
@@ -702,12 +704,14 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 8HS7BD5X88;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hiepkhach9x.camerademo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hiepkhach9x.camera;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HOPIZEN/Application/BridgingHeader/Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

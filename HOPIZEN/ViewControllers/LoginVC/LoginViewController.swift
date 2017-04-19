@@ -60,11 +60,7 @@ class LoginViewController: UIViewController{
             self.savePassword.image = UIImage(named: "checkbox_normal_white");
         }
         
-        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
-    }
-    
-    func homeAction(_ sender: AnyObject) {
-        return
+        HPZMainFrame.addNaviHomeImage()
     }
     
     override func viewDidDisappear(_ animated: Bool) {

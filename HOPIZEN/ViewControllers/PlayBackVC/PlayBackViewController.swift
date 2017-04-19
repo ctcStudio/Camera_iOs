@@ -25,6 +25,11 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
     @IBOutlet weak var cameraPicker: UIPickerView!
     @IBOutlet weak var playBackView: UITableView!
     
+    @IBOutlet weak var viewFrom: UIView!
+    @IBOutlet weak var viewTo: UIView!
+    @IBOutlet weak var viewSpeed: UIView!
+    @IBOutlet weak var viewName: UIView!
+    
     var host:String?
     var name:String?
     var pass:String?
@@ -59,6 +64,16 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.initSocket()
         
         // Do any additional setup after loading the view.
+        viewFrom.layer.borderWidth = 1.0
+        viewFrom.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
+        viewTo.layer.borderWidth = 1.0
+        viewTo.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
+        viewName.layer.borderWidth = 1.0
+        viewName.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
+        viewSpeed.layer.borderWidth = 1.0
+        viewSpeed.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
+
+        
         let nowDate = Date()
         self.fromDate = nowDate.startOfDay
         self.toDate = nowDate.endOfDay!

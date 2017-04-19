@@ -35,13 +35,9 @@ class HomeTableViewController: UITableViewController {
         self.tableView.allowsMultipleSelection = true
         
         HPZMainFrame.addMenuLeft(title: "Play back", titleColor: UIColor.white, target: self, action: #selector(playBack(sender:)))
-        HPZMainFrame.addMenuRight(title: "Realtime", titleColor: UIColor.white, target: self, action: #selector(realTime(sender:)))
-        HPZMainFrame.addNaviHomeBtn(target: self, action: #selector(homeAction(_:)))
+        HPZMainFrame.addMenuRight(title: "Online", titleColor: UIColor.white, target: self, action: #selector(realTime(sender:)))
+        HPZMainFrame.addNaviHomeImage()
         self.initSocket()
-    }
-    
-    func homeAction(_ sender: AnyObject) {
-        return
     }
 
     func playBack(sender:UIButton!){
@@ -52,10 +48,18 @@ class HomeTableViewController: UITableViewController {
        self.sendMessageCheckOnline()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.sk?.close()
+        self.sk = nil
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        self.sk?.close()
+        self.sk = nil
     }
 
     // MARK: - Table view data source
@@ -139,13 +143,7 @@ class HomeTableViewController: UITableViewController {
             self.cameraModelList.remove(at: index!)
         }
     }
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        self.sk?.close()
-        self.sk = nil
-    }
-    
-    
+
     func initSocket() {
         if((host?.isEmpty)!
             || (name?.isEmpty)!

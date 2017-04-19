@@ -126,6 +126,11 @@ class HPZMainFrame: NSObject {
         self.getNavi().addCenterBtnWithBackgroundImage(bgImg: UIImage(named: "image_navi_oto"), title: "", titleColor: UIColor.white, targer: target, action: action)
     }
 
+    static func addNaviHomeImage() -> Void {
+        self.getNavi().addCenterWithBackgroundImage(bgImg: UIImage(named: "image_navi_oto"))
+    }
+
+    
     static func addMenuLeft(title:String, titleColor: UIColor?, target:AnyObject?, action: Selector) {
         self.getNavi().addLeftBtnWithTitle(title: title, titleColor: titleColor, target: target, action: action)
     }
