@@ -177,6 +177,7 @@ extension HomeTableViewController : HPZSoketXXXXXDelegate {
             self.fillterCameraOnline(messsage: message)
             break
         default:
+            SVProgressHUD.dismiss()
             break
         }
     }
