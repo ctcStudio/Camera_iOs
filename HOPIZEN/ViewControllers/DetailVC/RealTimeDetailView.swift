@@ -53,6 +53,10 @@ class RealTimeDetailView: UIView, GMSMapViewDelegate {
         self.view.frame = self.bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.mapView.delegate = self
+        self.cameraName.text = self.cameraModel?.cameraName
+        self.cameraInfo.text = String(format: " 0 km/h %s %02d:%02d:%02d",(self.cameraModel?.cameraID)!,12,00,00)
+        self.addressView.text = ""
+        
         addSubview(view)
     }
     

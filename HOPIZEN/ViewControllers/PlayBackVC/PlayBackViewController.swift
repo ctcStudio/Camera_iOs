@@ -72,7 +72,15 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         viewName.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
         viewSpeed.layer.borderWidth = 1.0
         viewSpeed.layer.borderColor = UIColor.init(netHex: 0x3c3f41).cgColor
-
+        
+        let gestureFromDate = UITapGestureRecognizer(target: self, action:  #selector (self.xChooseFromDate(_:)))
+        self.viewFrom.addGestureRecognizer(gestureFromDate)
+        let gestureToDate = UITapGestureRecognizer(target: self, action:  #selector (self.xChooseToDate(_:)))
+        self.viewTo.addGestureRecognizer(gestureToDate)
+        let gestureSpeed = UITapGestureRecognizer(target: self, action:  #selector (self.xChooseSpeed(_:)))
+        self.viewSpeed.addGestureRecognizer(gestureSpeed)
+        let gestureCamera = UITapGestureRecognizer(target: self, action:  #selector (self.xChooseCamera(_:)))
+        self.viewName.addGestureRecognizer(gestureCamera)
         
         let nowDate = Date()
         self.fromDate = nowDate.startOfDay
@@ -147,6 +155,43 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.skPlayer = nil
     }
     
+    func xChooseFromDate(_ sender:UITapGestureRecognizer) {
+        self.selectType = PickerType.FromType
+        self.layoutChooseDate.isHidden = false
+        self.datePicker.isHidden = false
+        self.speedPicker.isHidden = true
+        self.cameraPicker.isHidden = true
+    }
+    
+    func xChooseToDate(_ sender:UITapGestureRecognizer) {
+        self.selectType = PickerType.ToType
+        self.layoutChooseDate.isHidden = false
+        self.datePicker.isHidden = false
+        self.speedPicker.isHidden = true
+        self.cameraPicker.isHidden = true
+    }
+    
+    func xChooseSpeed(_ sender:UITapGestureRecognizer) {
+        self.selectType = PickerType.SpeedType
+        self.layoutChooseDate.isHidden = false
+        self.datePicker.isHidden = true
+        self.speedPicker.isHidden = false
+        self.cameraPicker.isHidden = true
+    }
+    
+    func xChooseCamera(_ sender:UITapGestureRecognizer) {
+        self.selectType = PickerType.NameType
+        self.layoutChooseDate.isHidden = false
+        self.datePicker.isHidden = true
+        self.speedPicker.isHidden = true
+        self.cameraPicker.isHidden = false
+
+    }
+    
+    @IBAction func cancelSelect(_ sender: UIButton) {
+        self.layoutChooseDate.isHidden = true
+    }
+    
     @IBAction func selected(_ sender: UIButton) {
         switch self.selectType {
         case PickerType.FromType:
@@ -187,7 +232,8 @@ class PlayBackViewController: UIViewController, UITableViewDelegate,UITableViewD
         self.layoutChooseDate.isHidden = false
         self.datePicker.isHidden = false
         self.speedPicker.isHidden = true
-        self.cameraPicker.isHidden = true    }
+        self.cameraPicker.isHidden = true
+    }
     
     @IBAction func chooseCamera(_ sender: UIButton) {
         self.selectType = PickerType.NameType

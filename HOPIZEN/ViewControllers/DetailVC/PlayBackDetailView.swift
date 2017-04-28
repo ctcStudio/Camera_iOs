@@ -60,7 +60,11 @@ class PlayBackDetailView: UIView, GMSMapViewDelegate {
         self.cameraSlider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
         self.cameraSlider.addTarget(self, action: #selector(sliderValueTouchDown(_:)), for: .touchDown)
         self.cameraSlider.isContinuous = false
-        
+        let imageThumb:UIImage = (UIImage.init(named: "ic_slider_thumb")!.stretchableImage(withLeftCapWidth: 10, topCapHeight: 0))
+        self.cameraSlider.setThumbImage(imageThumb, for: UIControlState.normal)
+        self.cameraName.text = self.playBack?.cameraName
+        self.cameraInfo.text = String(format: " 0 km/h %s %02d:%02d:%02d",(self.playBack?.cameraID)!,12,00,00)
+        self.addressView.text = ""
         self.mapView.delegate = self
     }
     
