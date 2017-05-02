@@ -53,11 +53,18 @@ class RealTimeDetailView: UIView, GMSMapViewDelegate {
         self.view.frame = self.bounds
         view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         self.mapView.delegate = self
-        self.cameraName.text = self.cameraModel?.cameraName
-        self.cameraInfo.text = String(format: " 0 km/h %s %02d:%02d:%02d",(self.cameraModel?.cameraID)!,12,00,00)
-        self.addressView.text = ""
         
         addSubview(view)
+    }
+    
+    func setDefaultValue() {
+        self.cameraName.text = self.cameraModel?.toString()
+        let speed:String!  = "0 km/h"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let info = dateFormatter.string(from:Date()) + " " + speed
+        self.cameraInfo.text = info
+        self.addressView.text = ""
     }
     
     func loadViewFromNib() -> UIView {

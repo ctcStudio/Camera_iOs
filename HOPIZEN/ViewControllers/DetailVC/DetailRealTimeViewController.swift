@@ -35,6 +35,7 @@ class DetailRealTimeViewController: UIViewController, GMSMapViewDelegate {
             realTimeView.cameraModel = cameraModel
             realTimeView.isHidden = false
             realTimeView.delegate = self
+            realTimeView.setDefaultValue()
             self.realTimeViewList.append(realTimeView)
             self.scrollView.addSubview(realTimeView)
             scrollHeight = scrollHeight + height

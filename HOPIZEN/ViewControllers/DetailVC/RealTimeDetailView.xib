@@ -36,6 +36,7 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaJ-E2-6Gf">
                             <rect key="frame" x="314" y="20" width="46" height="30"/>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="XaJ-E2-6Gf" secondAttribute="height" multiplier="23:15" id="V8J-UC-xht"/>
                             </constraints>

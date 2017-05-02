@@ -40,6 +40,7 @@ class DetailViewController: UIViewController,GMSMapViewDelegate {
         self.playBackView?.speed = self.speed
         self.playBackView?.isHidden = false
         self.playBackView?.delegate = self
+        self.playBackView?.setDeaultValue()
         
         self.scrollView.contentSize = (self.playBackView?.bounds.size)!
         self.scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]

@@ -432,7 +432,7 @@
 				TargetAttributes = {
 					C27F247D1DFF965E009A81B6 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = H5RW6S5T6B;
+						DevelopmentTeam = 2GEY7ZRZ56;
 						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.Keychain = {
@@ -685,7 +685,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = H5RW6S5T6B;
+				DEVELOPMENT_TEAM = 2GEY7ZRZ56;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -706,7 +706,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = HOPIZEN/CAMERA.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = H5RW6S5T6B;
+				DEVELOPMENT_TEAM = 2GEY7ZRZ56;
 				INFOPLIST_FILE = HOPIZEN/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
