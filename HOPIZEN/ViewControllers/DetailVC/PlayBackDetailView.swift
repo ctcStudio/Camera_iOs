@@ -60,7 +60,7 @@ class PlayBackDetailView: UIView, GMSMapViewDelegate {
         self.cameraSlider.addTarget(self, action: #selector(sliderValueDidChange(_:)), for: .valueChanged)
         self.cameraSlider.addTarget(self, action: #selector(sliderValueTouchDown(_:)), for: .touchDown)
         self.cameraSlider.isContinuous = false
-        let imageThumb:UIImage = (UIImage.init(named: "ic_slider_thumb")!.stretchableImage(withLeftCapWidth: 10, topCapHeight: 0))
+        let imageThumb:UIImage = (UIImage.init(named: "ic_slider_thumb")!.stretchableImage(withLeftCapWidth: 10, topCapHeight: 10))
         self.cameraSlider.setThumbImage(imageThumb, for: UIControlState.normal)
         self.mapView.delegate = self
     }
